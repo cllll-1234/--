@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<title>档案拼图资产母版</title>
+<body>
+<canvas id="archive-master" width="1200" height="800"></canvas>
+<script>
+(() => {
+  "use strict";
+
+  const WIDTH = 1200;
+  const HEIGHT = 800;
+  const CROP = 440;
+  const MARGIN = 20;
+
+  function verticalOne(y) {
+    return 400 + Math.round(11 * Math.sin(y / 47) + 6 * Math.sin(y / 19));
+  }
+
+  function verticalTwo(y) {
+    return 800 + Math.round(12 * Math.sin(y / 53 + 1.2) + 5 * Math.sin(y / 23));
+  }
+
+  function horizontal(x) {
+    return 400 + Math.round(10 * Math.sin(x / 61 + .4) + 6 * Math.sin(x / 27));
+  }
+
+  function pieceAt(x, y) {
+    const row = y < horizontal(x) ? 0 : 1;
+    const column = x < verticalOne(y) ? 0 : x < verticalTwo(y) ? 1 : 2;
+    return row * 3 + column;
+  }
+
+  function drawPaper(ctx) {
+    ctx.clearRect(0, 0, WIDTH, HEIGHT);
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(15, 9); ctx.lineTo(1184, 5); ctx.lineTo(1194, 28); ctx.lineTo(1189, 205);
+    ctx.lineTo(1197, 394); ctx.lineTo(1190, 606); ctx.lineTo(1182, 791); ctx.lineTo(970, 795);
+    ctx.lineTo(757, 790); ctx.lineTo(548, 797); ctx.lineTo(327, 792); ctx.lineTo(16, 796);
+    ctx.lineTo(7, 635); ctx.lineTo(13, 476); ctx.lineTo(5, 312); ctx.lineTo(12, 151); ctx.closePath();
+    ctx.clip();
+
+    ctx.fillStyle = "#c8b58a";
+    ctx.fillRect(0, 0, WIDTH, HEIGHT);
+    const light = ctx.createRadialGradient(120, 80, 20, 190, 140, 880);
+    light.addColorStop(0, "rgba(255,244,205,.48)");
+    light.addColorStop(.48, "rgba(230,207,159,.12)");
+    light.addColorStop(1, "rgba(76,48,27,.20)");
+    ctx.fillStyle = light; ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+    let seed = 7124;
+    const random = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+    for (let i = 0; i < 420; i += 1) {
+      const x = random() * WIDTH, y = random() * HEIGHT, radius = .4 + random() * 2.4;
+      ctx.beginPath(); ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(73,49,29,${.018 + random() * .04})`; ctx.fill();
+    }
+    [[140,635,54,25],[1035,165,38,19],[935,705,28,15],[324,276,20,12]].forEach(stain => {
+      const gradient = ctx.createRadialGradient(stain[0], stain[1], 1, stain[0], stain[1], stain[2]);
+      gradient.addColorStop(0, "rgba(91,51,29,.15)"); gradient.addColorStop(1, "rgba(91,51,29,0)");
+      ctx.save(); ctx.scale(1, stain[3] / stain[2]); ctx.fillStyle = gradient;
+      ctx.fillRect(stain[0] - stain[2], (stain[1] - stain[2]) * stain[2] / stain[3], stain[2] * 2, stain[2] * 2 * stain[2] / stain[3]); ctx.restore();
+    });
+
+    ctx.lineCap = "round";
+    ctx.beginPath(); ctx.moveTo(88, 690); ctx.bezierCurveTo(330, 575, 715, 365, 1110, 112);
+    ctx.strokeStyle = "rgba(74,51,31,.16)"; ctx.lineWidth = 5; ctx.stroke();
+    ctx.strokeStyle = "rgba(255,240,199,.17)"; ctx.lineWidth = 2; ctx.translate(0, -3); ctx.stroke(); ctx.translate(0, 3);
+    ctx.beginPath(); ctx.moveTo(590, 22); ctx.bezierCurveTo(584, 235, 598, 515, 588, 780);
+    ctx.strokeStyle = "rgba(74,51,31,.12)"; ctx.lineWidth = 4; ctx.stroke();
+    ctx.strokeStyle = "rgba(255,240,199,.14)"; ctx.lineWidth = 1.5; ctx.translate(3, 0); ctx.stroke(); ctx.translate(-3, 0);
+
+    ctx.fillStyle = "#332a21";
+    ctx.textBaseline = "alphabetic";
+    ctx.font = '700 24px "Microsoft YaHei", "SimHei", sans-serif';
+    ctx.fillText("档案编号：J7-07-24", 86, 112);
+    ctx.font = '700 54px "Microsoft YaHei", "SimHei", sans-serif';
+    ctx.letterSpacing = "5px";
+    ctx.fillText("第七码头转运记录", 220, 205);
+    ctx.letterSpacing = "0px";
+    ctx.strokeStyle = "rgba(67,52,36,.56)"; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(145, 235); ctx.lineTo(1055, 235); ctx.stroke();
+
+    ctx.font = '700 31px "Microsoft YaHei", "SimHei", sans-serif';
+    ctx.fillText("批次：07-24", 694, 307);
+    ctx.fillText("来源区域：地下街东区", 155, 414);
+    ctx.fillText("转运人数：18", 165, 535);
+    ctx.fillText("G-17消耗：18单位", 560, 535);
+    ctx.fillText("处理方式：净化", 322, 654);
+    ctx.fillText("后续地点：投放区A", 704, 703);
+
+    ctx.save(); ctx.translate(810, 407); ctx.rotate(-.12);
+    ctx.strokeStyle = "rgba(111,35,33,.64)"; ctx.fillStyle = "rgba(111,35,33,.58)";
+    ctx.lineWidth = 8; ctx.beginPath(); ctx.arc(0, 0, 105, 0, Math.PI * 2); ctx.stroke();
+    ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(0, 0, 86, 0, Math.PI * 2); ctx.stroke();
+    ctx.lineWidth = 7; ctx.beginPath(); ctx.moveTo(-48, 23); ctx.lineTo(-24, -28); ctx.lineTo(0, 12); ctx.lineTo(25, -34); ctx.lineTo(49, 23); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(-55, 38); ctx.lineTo(55, 38); ctx.moveTo(-46, 51); ctx.lineTo(46, 51); ctx.stroke();
+    ctx.font = '800 24px "Microsoft YaHei", "SimHei", sans-serif'; ctx.textAlign = "center";
+    ctx.fillText("巨壁教档案", 0, 76); ctx.restore();
+
+    ctx.restore();
+  }
+
+  function cropPiece(master, index) {
+    const column = index % 3, row = Math.floor(index / 3);
+    const originX = column * 400 - MARGIN, originY = row * 400 - MARGIN;
+    const canvas = document.createElement("canvas"); canvas.width = CROP; canvas.height = CROP;
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    ctx.drawImage(master, originX, originY, CROP, CROP, 0, 0, CROP, CROP);
+    const image = ctx.getImageData(0, 0, CROP, CROP);
+    for (let y = 0; y < CROP; y += 1) {
+      for (let x = 0; x < CROP; x += 1) {
+        const globalX = originX + x, globalY = originY + y;
+        if (globalX < 0 || globalY < 0 || globalX >= WIDTH || globalY >= HEIGHT || pieceAt(globalX, globalY) !== index) {
+          image.data[(y * CROP + x) * 4 + 3] = 0;
+        }
+      }
+    }
+    ctx.putImageData(image, 0, 0);
+    return canvas;
+  }
+
+  function drawDecoy(ctx, group) {
+    const colors = { garrison: "#b9b8ad", supply: "#c1a77d", church: "#cbbd98" };
+    ctx.clearRect(0, 0, 800, 400);
+    ctx.fillStyle = colors[group]; ctx.fillRect(8, 8, 784, 384);
+    ctx.fillStyle = group === "supply" ? "rgba(92,52,29,.13)" : "rgba(70,63,49,.1)";
+    for (let y = 42; y < 390; y += 34) ctx.fillRect(15, y, 770, 1);
+    if (group === "supply") {
+      ctx.strokeStyle = "rgba(71,48,30,.19)"; ctx.lineWidth = 2;
+      [95, 292, 505, 690].forEach(x => { ctx.beginPath(); ctx.moveTo(x, 18); ctx.lineTo(x, 388); ctx.stroke(); });
+    }
+    ctx.fillStyle = "#3b3329"; ctx.textBaseline = "alphabetic"; ctx.textAlign = "left";
+    ctx.font = '700 27px "Microsoft YaHei", "SimHei", sans-serif';
+    if (group === "garrison") {
+      ctx.fillText("驻军器材维修", 48, 104); ctx.fillText("钢索：18束", 48, 198);
+      ctx.fillText("马匹登记", 454, 104); ctx.fillText("栗色母马 06", 454, 198);
+      ctx.strokeStyle = "rgba(65,57,45,.52)"; ctx.lineWidth = 2; ctx.strokeRect(585, 235, 116, 76);
+      ctx.font = '700 17px "Microsoft YaHei", "SimHei", sans-serif'; ctx.fillText("驻军审核", 600, 279);
+    } else if (group === "supply") {
+      ctx.fillText("粮食配给记录", 44, 104); ctx.fillText("黑麦：42袋", 44, 198);
+      ctx.fillText("仓库库存", 452, 104); ctx.fillText("煤油：31桶", 452, 198);
+      ctx.strokeStyle = "rgba(106,54,30,.52)"; ctx.lineWidth = 4; ctx.beginPath(); ctx.ellipse(660, 285, 54, 30, -.12, 0, Math.PI * 2); ctx.stroke();
+    } else {
+      ctx.fillText("教会捐赠清单", 42, 104); ctx.fillText("银币：18枚", 42, 198);
+      ctx.fillText("医疗用品记录", 438, 104); ctx.fillText("绷带、酒精", 438, 198); ctx.font = '700 20px "Microsoft YaHei", "SimHei", sans-serif'; ctx.fillText("批号：09", 438, 252);
+      ctx.strokeStyle = "rgba(104,60,45,.48)"; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(675, 285, 39, 0, Math.PI * 2); ctx.stroke(); ctx.beginPath(); ctx.moveTo(650, 285); ctx.lineTo(700, 285); ctx.moveTo(675, 260); ctx.lineTo(675, 310); ctx.stroke();
+    }
+    ctx.strokeStyle = "rgba(58,45,31,.3)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(18, 48); ctx.lineTo(780, 48); ctx.stroke();
+  }
+
+  function cropDecoy(master, side, group) {
+    const originX = side * 400 - MARGIN, originY = -MARGIN;
+    const canvas = document.createElement("canvas"); canvas.width = CROP; canvas.height = CROP;
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    ctx.drawImage(master, originX, originY, CROP, CROP, 0, 0, CROP, CROP);
+    const image = ctx.getImageData(0, 0, CROP, CROP);
+    for (let y = 0; y < CROP; y += 1) {
+      for (let x = 0; x < CROP; x += 1) {
+        const globalX = originX + x, globalY = originY + y;
+        const boundary = 400 + Math.round(12 * Math.sin(globalY / 37 + group.length));
+        if (globalX < 0 || globalY < 0 || globalX >= 800 || globalY >= 400 || (side === 0 ? globalX >= boundary : globalX < boundary)) image.data[(y * CROP + x) * 4 + 3] = 0;
+      }
+    }
+    ctx.putImageData(image, 0, 0); return canvas;
+  }
+
+  window.generateArchiveAssets = async () => {
+    const master = document.querySelector("#archive-master");
+    drawPaper(master.getContext("2d"));
+    const full = master.toDataURL("image/webp", .94);
+    const raster = new Image();
+    raster.src = full;
+    await raster.decode();
+    const decoyGroups = ["garrison", "supply", "church"].map(group => {
+      const canvas = document.createElement("canvas"); canvas.width = 800; canvas.height = 400;
+      drawDecoy(canvas.getContext("2d"), group);
+      return { group, pieces: [0, 1].map(side => cropDecoy(canvas, side, group).toDataURL("image/png")) };
+    });
+    return {
+      full,
+      pieces: Array.from({ length: 6 }, (_, index) => cropPiece(raster, index).toDataURL("image/png")),
+      decoys: decoyGroups,
+      width: WIDTH,
+      height: HEIGHT,
+      pieceSize: CROP,
+      margin: MARGIN
+    };
+  };
+  window.generateArchiveAssets();
+})();
+</script>
+</body>
+</html>

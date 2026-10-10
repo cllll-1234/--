@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>陈亮 | 个人介绍</title>
+<style>
+:root{
+  --bg:#031426;
+  --bg2:#061b31;
+  --text:#edf6ff;
+  --muted:#a7bfd6;
+  --blue:#4da3ff;
+  --line:rgba(92,163,225,.22);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  color:var(--text);
+  background:
+    radial-gradient(circle at 80% 5%,rgba(39,105,164,.18),transparent 32%),
+    linear-gradient(135deg,var(--bg),var(--bg2));
+  font-family:"Microsoft YaHei","Segoe UI",sans-serif;
+  line-height:1.85;
+}
+a{text-decoration:none;color:inherit}
+.container{width:min(1080px,calc(100% - 42px));margin:auto}
+
+/* 导航 */
+nav{
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line);
+}
+.logo{font-weight:800;letter-spacing:1px}
+.nav-links{display:flex;gap:34px;color:#7895b0;font-size:14px}
+.nav-links a{padding:21px 0;border-bottom:2px solid transparent}
+.nav-links a:hover,.nav-links a.active{color:#fff;border-color:var(--blue)}
+
+/* Hero */
+.hero{
+  position:relative;
+  min-height:390px;
+  overflow:hidden;
+  border-bottom:1px solid var(--line);
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,#031426 0%,rgba(3,20,38,.94) 42%,rgba(3,20,38,.38) 72%,rgba(3,20,38,.82) 100%),
+    linear-gradient(0deg,#031426 0%,transparent 35%);
+}
+.hero-bg{
+  position:absolute;
+  inset:0;
+  background:url("assets/chen-theme.png") center 18%/cover no-repeat;
+  filter:saturate(.85);
+  opacity:.82;
+}
+.hero-inner{
+  position:relative;
+  z-index:2;
+  min-height:390px;
+  display:flex;
+  align-items:center;
+  gap:42px;
+}
+.avatar{
+  flex:0 0 150px;
+  width:150px;height:150px;
+  border-radius:50%;
+  object-fit:cover;
+  object-position:27% 24%;
+  border:3px solid #397bb3;
+  box-shadow:0 0 0 7px rgba(30,82,125,.18),0 18px 45px rgba(0,0,0,.45);
+}
+.hero-copy{max-width:650px}
+.name{font-size:15px;color:var(--blue);letter-spacing:4px;margin-bottom:5px}
+h1{font-size:clamp(32px,5vw,52px);line-height:1.25;margin-bottom:10px}
+.hero-title{font-size:20px;color:#d8e9f8}
+.hero-desc{margin-top:13px;color:var(--muted);font-size:15px}
+
+/* sections */
+main{padding:45px 0 65px}
+section{margin-bottom:48px}
+.section-head{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:20px;
+}
+.section-head h2{font-size:25px}
+.section-head::after{
+  content:"";
+  height:1px;
+  width:70px;
+  background:var(--blue);
+  opacity:.75;
+}
+.section-text{max-width:930px;color:#bdd0e1;font-size:15px}
+.section-text p{margin-bottom:14px}
+strong{color:#fff}
+
+.interests{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.interest{
+  padding:22px 24px;
+  border-right:1px solid var(--line);
+}
+.interest:last-child{border-right:0}
+.icon{font-size:28px;margin-bottom:3px}
+.interest h3{font-size:16px;margin-bottom:5px}
+.interest p{font-size:13px;color:var(--muted)}
+
+.games{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+.game{
+  border:1px solid var(--line);
+  padding:24px;
+  background:rgba(8,30,51,.45);
+}
+.game h3{margin-bottom:7px}
+.game p{color:var(--muted);font-size:14px}
+
+.future{
+  padding:26px 30px;
+  border:1px solid var(--line);
+  background:rgba(8,30,51,.45);
+}
+.future p{color:#bdd0e1;font-size:15px}
+.motto{
+  margin-top:24px;
+  text-align:center;
+  color:#5fa9ed;
+  font-style:italic;
+  letter-spacing:2px;
+}
+
+footer{
+  border-top:1px solid var(--line);
+  padding:24px 0 34px;
+  text-align:center;
+  color:#637e97;
+  font-size:13px;
+}
+
+@media(max-width:720px){
+  .container{width:min(100% - 28px,1080px)}
+  nav{height:58px}
+  .nav-links{gap:15px;font-size:12px}
+  .nav-links a{padding:18px 0}
+  .hero-inner{padding:48px 0;align-items:flex-start;flex-direction:column;gap:22px}
+  .hero{min-height:auto}
+  .avatar{width:110px;height:110px;flex-basis:110px}
+  .interests,.games{grid-template-columns:1fr 1fr}
+  .interest:nth-child(2){border-right:0}
+  .interest:nth-child(3),.interest:nth-child(4){border-top:1px solid var(--line)}
+}
+@media(max-width:460px){
+  .nav-links a:nth-child(3),.nav-links a:nth-child(4){display:none}
+  .interests,.games{grid-template-columns:1fr}
+  .interest{border-right:0!important;border-top:1px solid var(--line)}
+  .interest:first-child{border-top:0}
+}
+</style>
+</head>
+
+<body>
+<nav class="container">
+  <a class="logo" href="#top">陈亮</a>
+  <div class="nav-links">
+    <a class="active" href="#top">首页</a>
+    <a href="#about">关于我</a>
+    <a href="#interests">兴趣爱好</a>
+    <a href="#games">游戏 & 动漫</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="container hero-inner">
+    <img class="avatar" src="assets/chen-theme.png" alt="陈亮的头像">
+    <div class="hero-copy">
+      <div class="name">CHEN LIANG</div>
+      <h1>陈亮</h1>
+      <div class="hero-title">👋 Hello，我是一个正在努力升级中的程序员！</div>
+      <p class="hero-desc">计算机科学与技术专业 · 大二学生</p>
+      <p class="hero-desc">“代码、游戏、运动、动漫 —— 是我大学生活的全部热爱，也是我不断前进的动力。”</p>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+<section id="about">
+  <div class="section-head"><h2>关于我</h2></div>
+  <div class="section-text">
+    <p>你好！我是一名<strong>计算机科学与技术专业的大二学生</strong>，目前正在和代码进行一场长期“拉锯战”。现阶段主要在学习前端和游戏开发，正在努力掌握 HTML、CSS、JavaScript 这些前端开发的基础知识，希望有一天能够真正独立做出一个属于自己的小项目。</p>
+    <p>虽然学了不少编程知识，但我也很清楚地知道——<strong>我的编程能力还有很大的提升空间！</strong> 😭 所以接下来准备开启“洛谷刷题之旅”，通过刷题锻炼算法、数据结构和解决问题的能力。毕竟，代码不会自己变强，只能让自己多写、多错、多改，然后慢慢变强！</p>
+    <p>除了敲代码，我平时还是一个比较喜欢运动的人 🏀。篮球、羽毛球、乒乓球都是我喜欢的项目，有时候也会去跑跑步、游游泳。运动对我来说不仅是放松，也是给大脑“重启”的一种方式。</p>
+    <p>当然，作为一名普通大学生，娱乐也是必不可少的！🎮 平时喜欢玩《王者荣耀》，最近则沉迷于《進擊的巨人》。巧的是，我们小组目前正在制作一款和《進擊的巨人》相关的游戏，所以最近正在疯狂补番、恶补世界观和背景知识。只能说——<strong>为了做游戏，我连番都追得更加理直气壮了！</strong></p>
+  </div>
+</section>
+
+<section id="interests">
+  <div class="section-head"><h2>兴趣爱好</h2></div>
+  <div class="interests">
+    <div class="interest"><div class="icon">🏀</div><h3>篮球</h3><p>热爱篮球，享受和朋友一起打球的快乐。</p></div>
+    <div class="interest"><div class="icon">🏸</div><h3>羽毛球</h3><p>喜欢羽毛球，享受挥拍的感觉。</p></div>
+    <div class="interest"><div class="icon">🏓</div><h3>乒乓球</h3><p>小小的球，大大的乐趣。</p></div>
+    <div class="interest"><div class="icon">🏃</div><h3>跑步 / 游泳</h3><p>偶尔跑跑步、游游泳，让身体和大脑放松一下。</p></div>
+  </div>
+</section>
+
+<section id="games">
+  <div class="section-head"><h2>游戏 & 动漫</h2></div>
+  <div class="games">
+    <div class="game">
+      <h3>🎮 王者荣耀</h3>
+      <p>平时喜欢玩的游戏，快乐上分，才是正经事！</p>
+    </div>
+    <div class="game">
+      <h3>👁 進擊的巨人</h3>
+      <p>最近正在疯狂补番……为了小组游戏项目，也顺便恶补世界观和背景知识。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head"><h2>未来的我</h2></div>
+  <div class="future">
+    <p>目前的我可能还不是一个很厉害的程序员，但我正在一点一点学习，一点一点进步。</p>
+    <p>希望未来能够把“会写一点代码”升级成“真的能做出东西”，也期待在大学剩下的时间里，留下更多有趣的项目和难忘的经历！ 🚀</p>
+    <div class="motto">—　Keep Coding · Keep Learning · Keep Growing　—</div>
+  </div>
+</section>
+
+</main>
+
+<footer>© 2026 陈亮 · 一个正在努力升级中的程序员</footer>
+
+<script>
+const links=[...document.querySelectorAll('.nav-links a')];
+const sections=[...document.querySelectorAll('main section')];
+window.addEventListener('scroll',()=>{
+  let current='top';
+  sections.forEach(s=>{
+    if(scrollY >= s.offsetTop-180) current=s.id;
+  });
+  links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current));
+});
+</script>
+</body>
+</html>

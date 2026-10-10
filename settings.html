@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>设置 | 进击的巨人</title>
+  <link rel="stylesheet" href="css/common.css"><link rel="stylesheet" href="css/form.css"><link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <header class="site-header"><a class="brand" href="index.html"><span class="brand-mark"><span>墙</span></span>进击的巨人</a><nav><ul><li><a href="index.html">主页</a></li><li><a href="achievements.html">成就</a></li></ul></nav></header>
+  <main class="form-page"><form id="settings-form" class="form-card panel"><header><p class="eyebrow">Field Configuration</p><h1>游戏设置</h1></header><div class="settings-list">
+    <div class="form-group"><div class="range-row"><label for="text-speed">文字速度</label><output id="speed-output" for="text-speed">40 ms/字</output></div><input id="text-speed" name="textSpeed" type="range" min="30" max="50" step="5"></div>
+    <div class="form-group"><div class="range-row"><label for="master-volume">总音量</label><output id="volume-output" for="master-volume">100%</output></div><input id="master-volume" name="volume" type="range" min="0" max="100" step="5"></div>
+    <label class="check-row"><input name="music" type="checkbox">开启背景音乐</label>
+    <label class="check-row"><input name="sound" type="checkbox">开启音效</label>
+    <p class="notice">总音量控制背景音乐和游戏内音效，不影响首页菜单的悬停、点击和进入音效。</p>
+    <button id="reset-settings" class="button danger" type="button">重置设置</button><a class="button ghost" href="index.html">保存并返回主页</a>
+  </div></form></main>
+  <script src="js/settings.js"></script>
+  <script src="js/menu-bgm.js"></script>
+</body>
+</html>

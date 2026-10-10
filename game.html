@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>剧情 | 进击的巨人</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/game.css?v=dialog-outline-20261009">
+  <link rel="stylesheet" href="css/explore.css">
+  <link rel="stylesheet" href="css/archive-restoration.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="game-page">
+  <main id="game-stage" class="game-stage">
+    <header class="game-topbar">
+      <span id="chapter-label" class="chapter-label">序章</span>
+      <nav class="game-controls" aria-label="游戏控制">
+        <button id="quick-save" class="button ghost" type="button">保存</button>
+        <a class="button ghost" href="settings.html">设置</a>
+        <a class="button ghost" href="index.html">返回主页</a>
+      </nav>
+    </header>
+    <section id="explore-scene" class="explore-scene" aria-label="俯视探索场景" hidden>
+      <div id="explore-world" class="explore-world">
+        <div id="map-layer" class="map-layer" aria-hidden="true"></div>
+        <div id="collision-layer" class="collision-layer" aria-hidden="true"></div>
+        <div id="npc-layer" class="npc-layer"></div>
+        <div id="object-layer" class="object-layer"></div>
+        <div id="player" class="explore-player" role="img" aria-label="莱纳">
+          <img class="player-sprite" alt="" draggable="false">
+          <span aria-hidden="true">莱</span>
+        </div>
+      </div>
+      <aside class="explore-objective" aria-live="polite">
+        <span>当前目标</span>
+        <strong id="objective-text">与韩吉交谈</strong>
+      </aside>
+      <button id="interaction-prompt" class="interaction-prompt" type="button" hidden>[E] 互动</button>
+      <div id="evidence-toast" class="evidence-toast" role="status" aria-live="polite" hidden></div>
+      <div id="mobile-controls" class="mobile-controls" aria-label="移动控制">
+        <div class="direction-pad">
+          <button class="move-button up" type="button" data-direction="up" aria-label="向上移动">↑</button>
+          <button class="move-button left" type="button" data-direction="left" aria-label="向左移动">←</button>
+          <button class="move-button down" type="button" data-direction="down" aria-label="向下移动">↓</button>
+          <button class="move-button right" type="button" data-direction="right" aria-label="向右移动">→</button>
+        </div>
+        <button id="mobile-interact" class="mobile-interact" type="button">互动</button>
+      </div>
+    </section>
+    <section class="character-layer" aria-label="角色立绘区域">
+      <img id="character-image" alt="" hidden>
+    </section>
+    <section id="dialog-area" class="dialog-area" aria-live="polite" hidden>
+      <h1 id="speaker" class="speaker">旁白</h1>
+      <div id="dialog-box" role="button" tabindex="0" aria-label="对话框，点击显示全文或继续">
+        <p id="dialog-text"></p>
+        <div id="choices" class="choices"></div>
+        <span id="continue-hint" class="continue-hint" hidden>点击继续 ▼</span>
+      </div>
+    </section>
+    <section id="scene-effect-overlay" class="scene-effect-overlay" aria-live="assertive" hidden>
+      <p id="scene-effect-text" class="scene-effect-text"></p>
+    </section>
+  </main>
+  <script src="js/save.js"></script>
+  <script src="js/achievement.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/prologue-bgm.js"></script>
+  <script src="js/story.js"></script>
+  <script src="js/minigame-manager.js"></script>
+  <script src="js/chapter3-archive-puzzle.js"></script>
+  <script src="js/minigames/archive-restoration.js"></script>
+  <script src="js/chapter4-memory-reconstruction.js"></script>
+  <script src="js/chapter5-minigames.js"></script>
+  <script src="js/chapter1-maneuver.js"></script>
+  <script src="js/explore/scene-effects.js"></script>
+  <script src="js/dialog.js?v=connected-20261010"></script>
+  <script src="js/explore/hq-collisions.js"></script>
+  <script src="js/explore/street-sermon-collisions.js"></script>
+  <script src="js/explore/oldtown-collisions.js"></script>
+  <script src="js/explore/underground-street-data.js"></script>
+  <script src="js/explore/underground-tavern-data.js"></script>
+  <script src="js/explore/old-church-data.js"></script>
+  <script src="js/explore/warehouse-data.js"></script>
+  <script src="js/explore/maintenance-station-data.js"></script>
+  <script src="js/explore/clock-tower-data.js"></script>
+  <script src="js/explore/central-district-data.js"></script>
+  <script src="js/explore/central-facility-data.js"></script>
+  <script src="js/explore/map-data.js"></script>
+  <script src="js/explore/npc-manager.js"></script>
+  <script src="js/explore/interaction-manager.js"></script>
+  <script src="js/explore/player-controller.js"></script>
+  <script src="js/explore/explore-manager.js"></script>
+  <script src="js/explore/warehouse-debug.js"></script>
+  <script src="js/explore/old-church-debug.js"></script>
+  <script src="js/explore/maintenance-station-debug.js"></script>
+</body>
+</html>

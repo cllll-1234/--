@@ -1,0 +1,41 @@
+@media (max-width: 980px) {
+  .dialog-area { padding-right: 6vw; padding-left: 6vw; }
+  .character-layer { right: 2%; }
+}
+@media (max-width: 768px) {
+  .site-header { align-items: flex-start; flex-direction: column; }
+  nav ul { gap: .1rem; }
+  nav ul li a { padding: .45rem .6rem; }
+  .grid.two, .grid.three, .profile-layout { grid-template-columns: 1fr; }
+  .home-page::after { background: linear-gradient(0deg,rgba(4,5,4,.94) 0%,rgba(5,6,5,.68) 52%,rgba(5,6,5,.36) 100%),linear-gradient(90deg,rgba(5,6,5,.48),transparent 55%); }
+  .home-content { width: calc(100% - 2rem); min-height: 100svh; padding: 0; }
+  .home-menu { align-self: center; width: min(330px, 100%); max-width: none; }
+  .home-menu .button { min-height: 58px; padding-left: 1rem; }
+  .home-menu .button:hover, .home-menu .button:focus-visible { transform: translateX(6px); }
+  .menu-en { font-size: .62rem; }
+  .menu-cn { font-size: .96rem; }
+  .version-mark { display: none; }
+  .user-status { right: 1rem; bottom: .8rem; left: 1rem; text-align: center; }
+  .game-topbar { padding: 1rem; }
+  .chapter-label { max-width: 55vw; font-size: .66rem; }
+  .chapter-label::before { content: "CH.  /  "; }
+  .game-controls { gap: .8rem; }
+  .game-controls .button { min-height: 40px; font-size: .7rem; }
+  .character-layer { inset: 9% -8% 28% 0; justify-content: center; }
+  .character-layer img { max-width: 96vw; max-height: 68vh; }
+  .dialog-area { min-height: 36vh; padding: 4rem 1rem max(1rem,env(safe-area-inset-bottom)); }
+  .speaker { margin-bottom: .55rem; font-size: 1rem; }
+  #dialog-box { min-height: 150px; }
+  #dialog-text { min-height: 5.4em; font-size: clamp(.96rem,4vw,1.08rem); line-height: 1.75; }
+  .choices { margin-top: .45rem; }
+  .choice-button { grid-template-columns: 2.5rem 1fr; min-height: 64px; padding-right: .35rem; font-size: .92rem; }
+  .choice-button:hover, .choice-button:focus { transform: translateX(5px); }
+  .choice-button::after { font-size: .5rem; letter-spacing: .12em; }
+}
+@media (max-height: 680px) and (min-width: 769px) {
+  .home-menu .button { min-height: 52px; }
+  .dialog-area { min-height: 230px; padding-top: 3.5rem; padding-bottom: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

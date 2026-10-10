@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>旧教堂 · 全图参考</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/explore.css">
+  <style>
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #11120f; }
+    #overview-stage { position: fixed; inset: 0; overflow: hidden; }
+    #overview-world { width: 1280px; height: 960px; }
+    #overview-controls {
+      position: fixed; z-index: 20; right: 12px; top: 12px; padding: 8px 11px;
+      border: 1px solid #b9a16b; background: rgba(15, 15, 13, .92);
+      color: #eee0bd; font: 13px/1.4 sans-serif;
+    }
+    #overview-controls a { color: #b9e2e0; }
+    body.capture #overview-controls { display: none; }
+    #overview-world.debug-map .oldtown-debug-marker { font-size: 11px; }
+  </style>
+</head>
+<body>
+  <div id="overview-stage">
+    <div id="overview-world" class="explore-world has-map-art" data-map="oldChurch">
+      <div class="map-layer" style="background-image: url('images/maps/old_church.png')" aria-hidden="true"></div>
+      <div id="overview-collisions" class="collision-layer" aria-hidden="true"></div>
+      <div id="overview-objects" class="object-layer" aria-hidden="true"></div>
+    </div>
+  </div>
+  <div id="overview-controls">旧教堂全图 · 1280×960　<a id="overview-toggle" href="?debug=1">查看碰撞与交互</a></div>
+  <script src="js/explore/old-church-data.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      const church = window.TitanOldChurch;
+      const query = new URLSearchParams(location.search);
+      const debug = query.get("debug") === "1";
+      const world = document.querySelector("#overview-world");
+      const objects = document.querySelector("#overview-objects");
+      const collisions = document.querySelector("#overview-collisions");
+      document.body.classList.toggle("capture", query.get("capture") === "1");
+      world.classList.toggle("debug-map", debug);
+      document.querySelector("#overview-toggle").textContent = debug ? "查看纯地图" : "查看碰撞与交互";
+      document.querySelector("#overview-toggle").href = debug ? "old-church-overview.html" : "?debug=1";
+
+      church.decorations.forEach(function (object) {
+        const element = document.createElement("div");
+        element.className = "explore-object object-" + object.type;
+        element.style.left = object.x + "px";
+        element.style.top = object.y + "px";
+        element.style.width = object.width + "px";
+        element.style.height = object.height + "px";
+        const symbol = document.createElement("span");
+        symbol.className = "object-symbol";
+        symbol.textContent = object.symbol || "";
+        element.appendChild(symbol);
+        objects.appendChild(element);
+      });
+
+      if (debug) {
+        church.collisions.forEach(function (block) {
+          const element = document.createElement("div");
+          element.className = "collision-block";
+          element.style.left = block.x + "px";
+          element.style.top = block.y + "px";
+          element.style.width = block.width + "px";
+          element.style.height = block.height + "px";
+          element.dataset.label = block.label;
+          collisions.appendChild(element);
+        });
+        church.interactionZones.forEach(function (zone) {
+          const marker = document.createElement("div");
+          marker.className = "oldtown-debug-marker debug-interaction";
+          marker.style.left = zone.x + "px";
+          marker.style.top = zone.y + "px";
+          marker.style.width = zone.width + "px";
+          marker.style.height = zone.height + "px";
+          marker.textContent = zone.name;
+          const radius = document.createElement("span");
+          radius.className = "interaction-radius-marker";
+          radius.style.width = zone.interactionDistance * 2 + "px";
+          radius.style.height = zone.interactionDistance * 2 + "px";
+          marker.appendChild(radius);
+          objects.appendChild(marker);
+        });
+      }
+
+      function fit() {
+        const scale = Math.min(innerWidth / church.referenceWidth, innerHeight / church.referenceHeight);
+        const x = (innerWidth - church.referenceWidth * scale) / 2;
+        const y = (innerHeight - church.referenceHeight * scale) / 2;
+        world.style.transform = "translate(" + x + "px," + y + "px) scale(" + scale + ")";
+      }
+      addEventListener("resize", fit);
+      fit();
+    }());
+  </script>
+</body>
+</html>

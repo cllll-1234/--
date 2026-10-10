@@ -1,0 +1,7 @@
+.achievement-card { position: relative; padding: 1.5rem; border: 1px solid var(--border); background: var(--panel-soft); transition: transform .2s; }
+.achievement-card.unlocked { border-color: rgba(185,154,97,.72); }
+.achievement-card.locked { filter: grayscale(1); opacity: .55; }
+.achievement-card:hover { transform: translateY(-3px); }
+.achievement-icon { display: grid; width: 58px; aspect-ratio: 1; place-items: center; margin-bottom: 1rem; border: 1px solid currentColor; border-radius: 50%; color: var(--gold); font-size: 1.4rem; }
+.achievement-state { font-size: .8rem; letter-spacing: .1em; color: var(--moss-light); }
+

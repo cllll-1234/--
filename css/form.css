@@ -1,0 +1,17 @@
+.form-page { display: grid; min-height: calc(100vh - 73px); place-items: center; padding: 2rem 1rem; }
+.form-card { width: min(460px, 100%); }
+.form-card header { margin-bottom: 1.5rem; }
+.form-group { margin-bottom: 1.15rem; }
+.form-group label { display: block; margin-bottom: .4rem; color: #d0c8b4; }
+.form-group input:not([type="checkbox"]), .form-group select {
+  width: 100%; min-height: 48px; padding: .65rem .8rem;
+  border: 1px solid #4b554b; color: var(--paper); background: rgba(3,6,4,.62);
+}
+.form-group input:focus, .form-group select:focus { border-color: var(--gold); outline: 2px solid rgba(185,154,97,.18); }
+.check-row { display: flex; align-items: flex-start; gap: .65rem; color: var(--muted); }
+.form-actions { display: grid; gap: .7rem; margin-top: 1.5rem; }
+.form-message { min-height: 1.7rem; margin: .8rem 0 0; color: #d98a82; }
+.settings-list { display: grid; gap: 1.2rem; }
+.range-row { display: grid; grid-template-columns: 1fr auto; gap: .8rem; align-items: center; }
+input[type="range"] { accent-color: var(--gold); }
+

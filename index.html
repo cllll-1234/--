@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="《進擊的巨人》互動劇情與小遊戲網頁遊戲">
+  <title>進擊的巨人 | 物語体験</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/intro.css">
+</head>
+<body class="home-page home-gate startup-active">
+  <section id="startup-video-overlay" class="startup-video-overlay" aria-label="游戏开场视频">
+    <video id="startup-video" src="video/start.mp4" autoplay muted preload="auto" playsinline aria-label="《进击的巨人》世界观介绍"></video>
+    <button class="startup-skip-hint" type="button" aria-label="跳过动画，快捷键 Tab">
+      <span class="startup-skip-emblem" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 4c-4-1-9 1-12 5-2 3-2 6-1 8 3 1 6 0 9-3 3-3 5-7 4-10Z"/><path d="m4 20 12-12M8 16l-1-5m5 1 5 1"/></svg></span>
+      <span class="startup-skip-copy"><span>跳过动画</span><small>ADVANCE BEYOND</small></span>
+      <kbd>Tab</kbd>
+    </button>
+    <p id="startup-video-status" class="startup-video-status" role="status" hidden></p>
+    <button id="play-startup-video" class="startup-play-button" type="button" hidden>点击播放开场</button>
+  </section>
+  <video class="home-background-video" autoplay muted loop playsinline preload="auto" poster="images/bg/home.png" aria-hidden="true">
+    <source src="video/home-background.mp4" type="video/mp4">
+  </video>
+  <img class="home-title-logo" src="images/ui/title-logo-traditional.png" alt="進撃的巨人：牆內的抉擇">
+  <button id="home-entry" class="home-entry" type="button"><span>按enter进入游戏</span></button>
+  <a class="skip-link" href="#main-content">跳至主要內容</a>
+  <main id="main-content" class="home-content">
+    <nav class="home-menu" aria-label="遊戲主選單" tabindex="-1">
+      <button id="new-game" class="button primary" type="button">
+        <span class="menu-en">はじめから</span><span class="menu-cn">新遊戲</span>
+      </button>
+      <button id="continue-game" class="button" type="button">
+        <span class="menu-en">つづきから</span><span class="menu-cn">繼續遊戲</span>
+      </button>
+      <a class="button" href="achievements.html">
+        <span class="menu-en">実績</span><span class="menu-cn">成就</span>
+      </a>
+      <a class="button ghost" href="settings.html">
+        <span class="menu-en">設定</span><span class="menu-cn">設定</span>
+      </a>
+      <a class="button ghost" href="about-game.html">
+        <span class="menu-en">作品紹介</span><span class="menu-cn">遊戲介紹</span>
+      </a>
+      <a class="button ghost" href="team.html">
+        <span class="menu-en">制作陣</span><span class="menu-cn">小組介紹</span>
+      </a>
+      <a id="auth-button" class="button ghost" href="login.html">
+        <span class="menu-en">ログイン</span><span class="menu-cn">登入</span>
+      </a>
+    </nav>
+
+    <p id="user-status" class="user-status"></p>
+    <p class="version-mark">2.0 · 記憶喪失者</p>
+  </main>
+
+  <section id="intro-video-overlay" class="intro-video-overlay" aria-label="开场视频" hidden>
+    <video id="intro-video" preload="metadata" autoplay playsinline aria-label="《进击的巨人》开场背景介绍"></video>
+    <p id="intro-video-status" class="intro-video-status" role="status" hidden></p>
+    <button id="play-intro" class="intro-play-button" type="button" hidden>点击播放</button>
+    <button id="skip-intro" class="skip-intro-button" type="button">跳过 <span>スキップ</span></button>
+  </section>
+
+  <section id="chapter-title-overlay" class="chapter-title-overlay" aria-label="序章章节标题" hidden>
+    <div class="chapter-title-content">
+      <p class="chapter-work-title">《进击的巨人》</p>
+      <h2>序章：失忆者</h2>
+      <p class="chapter-title-caption">记忆缺失的人，往往最接近真相。</p>
+    </div>
+  </section>
+  <script src="js/save.js"></script>
+  <script src="js/achievement.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/startup-video.js"></script>
+  <script src="js/menu-bgm.js"></script>
+  <script src="js/menu-sfx.js"></script>
+  <script src="js/intro.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>主角冷灰版 · 动画对比</title>
+<style>
+*{box-sizing:border-box}body{margin:0;padding:32px;background:#0b0e0c;color:#d4cebf;font:15px/1.8 "Microsoft YaHei",sans-serif}h1{font-size:26px;font-weight:400}h2{font-size:18px;font-weight:400}.directions,.frames{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}.card{border:1px solid #343a32;background:#121713;padding:18px}.pair{display:flex;gap:8px}.sprite{display:flex;flex:1;align-items:center;justify-content:center;height:200px;background:linear-gradient(#0002,#0002),url('../../../maps/oldtown.png') center/cover}.sprite img{width:128px;height:128px;image-rendering:pixelated}.captions{display:flex;justify-content:space-around;color:#999f92}.frames .card{text-align:center}.frames img{width:256px;height:256px;max-width:100%;image-rendering:pixelated;background:repeating-conic-gradient(#26312b 0% 25%,#1b241f 0% 50%) 50%/20px 20px}.frames p{font-size:12px;overflow-wrap:anywhere}button{font:inherit;background:#20281f;color:#d4cebf;border:1px solid #53614e;padding:8px 18px;cursor:pointer}p{color:#a9afa2}
+</style></head>
+<body><h1>主角冷灰版 · 动画对比</h1><p>左右分别为原版与重绘版。下方展示全部14帧，方格表示透明背景。</p><button id="toggle" type="button">暂停动画</button><h2>四方向动作</h2><div class="directions" id="directions"></div><h2>全部帧</h2><div class="frames" id="frames"></div>
+<script>
+const directions=[['down','向下'],['up','向上'],['left','向左'],['right','向右']];
+const frames=['reiner_idle_down.png','reiner_idle_up.png','reiner_idle_left.png','reiner_idle_right.png','reiner_walk_down_1.png','reiner_walk_down_2.png','reiner_walk_up_1.png','reiner_walk_up_2.png','reiner_walk_left_1.png','reiner_walk_left_2.png','reiner_walk_left_2_clear.png','reiner_walk_right_1.png','reiner_walk_right_2.png','reiner_walk_right_2_clear.png'];
+const animations=[];
+directions.forEach(([direction,label])=>{const card=document.createElement('section');card.className='card';card.innerHTML='<h2>'+label+'</h2><div class="pair"><div class="sprite"><img alt="原版'+label+'"></div><div class="sprite"><img alt="重绘版'+label+'"></div></div><div class="captions"><span>原版</span><span>冷灰重绘</span></div>';document.querySelector('#directions').append(card);animations.push({direction,imgs:card.querySelectorAll('img')});});
+frames.forEach(name=>{const card=document.createElement('section');card.className='card';const image=document.createElement('img');image.src='../v2/'+name;image.alt=name;const p=document.createElement('p');p.textContent=name;card.append(image,p);document.querySelector('#frames').append(card);});
+let tick=0,paused=false;
+function render(){animations.forEach(({direction,imgs})=>{const clear=direction==='left'||direction==='right';const seq=['reiner_idle_'+direction+'.png','reiner_walk_'+direction+'_1.png','reiner_walk_'+direction+'_2'+(clear?'_clear':'')+'.png'];const name=seq[tick%3];imgs[0].src='original-v2/'+name;imgs[1].src='../v2/'+name;});}
+render();setInterval(()=>{if(!paused){tick++;render();}},220);
+document.querySelector('#toggle').onclick=function(){paused=!paused;this.textContent=paused?'继续动画':'暂停动画';};
+</script></body></html>

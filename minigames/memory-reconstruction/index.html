@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>記憶重構</title>
+
+    <link
+        rel="stylesheet"
+        href="memory.css"
+    >
+</head>
+
+
+<body>
+
+
+<!-- =================================================
+     第一階段：記憶拼湊
+================================================= -->
+
+<div
+    id="sortScene"
+    class="scene active"
+>
+
+    <div class="backgroundDark"></div>
+
+    <div class="sceneContent">
+
+        <div class="gameTitle">
+            記憶重構
+        </div>
+
+        <div class="gameSubtitle">
+            通過交換位置將破碎的記憶重新排列
+        </div>
+
+        <div
+            id="errorText"
+            class="errorText"
+        ></div>
+
+
+        <div
+            id="normalCards"
+            class="normalCards"
+        ></div>
+
+
+        <button
+            id="confirmButton"
+            class="confirmButton"
+            onclick="checkAnswer()"
+        >
+            確認記憶順序
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =================================================
+     病症過渡
+================================================= -->
+
+<div
+    id="transitionScene"
+    class="scene transitionScene"
+>
+
+    <div class="transitionDark"></div>
+
+    <div class="memoryNoise"></div>
+
+    <div class="memoryVignette"></div>
+
+
+    <!-- 記憶閃回 -->
+
+    <div class="memoryFlash flash1">
+        轟——！
+    </div>
+
+    <div class="memoryFlash flash2">
+        門……
+    </div>
+
+    <div class="memoryFlash flash3">
+        巨人……
+    </div>
+
+    <div class="memoryFlash flash4">
+        海……
+    </div>
+
+
+    <!-- 中央文字 -->
+
+    <div class="transitionContent">
+
+        <div class="mainText">
+            ……我想起來了。
+        </div>
+
+        <div class="secondText">
+            等等……
+        </div>
+
+        <div class="warningText">
+            為什麼……頭這麼痛……
+        </div>
+
+        <div class="painText">
+            啊……
+        </div>
+
+        <div class="memoryFragmentText">
+            這些記憶……
+        </div>
+
+        <div class="memoryFragmentText2">
+            不對……
+        </div>
+
+        <div class="memoryBlocked">
+            記憶紊亂
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =================================================
+     魔法換牌
+================================================= -->
+
+<div
+    id="magicScene"
+    class="scene magicScene"
+>
+
+    <div class="magicBackground"></div>
+
+    <div class="magicContent">
+
+        <div class="magicTitle">
+            記憶正在失序
+        </div>
+
+        <div
+            id="magicProgress"
+            class="magicProgress"
+        >
+            第一次交換
+        </div>
+
+        <div
+            id="magicGrid"
+            class="magicGrid"
+        ></div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =================================================
+     第二階段：背面重新排列
+================================================= -->
+
+<div
+    id="blindScene"
+    class="scene blindScene"
+>
+
+    <div class="blindBackground"></div>
+
+    <div class="blindContent">
+
+        <div class="blindTitle">
+            重新整理記憶
+        </div>
+
+        <div class="blindSubtitle">
+            記憶已經無法辨認
+        </div>
+
+
+        <div
+            id="blindCards"
+            class="blindCards"
+        ></div>
+
+
+        <button
+            id="blindConfirmButton"
+            class="confirmButton blindConfirm"
+            onclick="checkSecondAnswer()"
+        >
+            確認記憶
+        </button>
+
+
+        <div
+            id="chanceText"
+            class="chanceText"
+        >
+            剩餘機會：2
+        </div>
+
+
+        <div
+            id="blindError"
+            class="blindError"
+        ></div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =================================================
+     記憶播放
+================================================= -->
+
+<div
+    id="memoryScene"
+    class="scene memoryScene"
+>
+
+    <div class="memorySceneBackground"></div>
+
+    <div class="memorySceneContent">
+
+        <div
+            id="memoryImageBox"
+            class="memoryImageBox"
+        >
+
+            <img
+                id="memoryImage"
+                src=""
+                alt=""
+            >
+
+            <div
+                id="memoryImageFallback"
+                class="memoryImageFallback"
+                hidden
+            ></div>
+
+        </div>
+
+
+        <div
+            id="memorySpeaker"
+            class="memorySpeaker"
+        ></div>
+
+
+        <div
+            id="memoryText"
+            class="memoryText"
+        ></div>
+
+
+        <div
+            id="memoryHint"
+            class="memoryHint"
+        >
+            點擊繼續 / Enter
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =================================================
+     結局
+================================================= -->
+
+<div
+    id="endingScene"
+    class="scene endingScene"
+>
+
+    <div class="endingBackground"></div>
+
+    <div class="endingContent">
+
+        <div
+            id="endingTitle"
+            class="endingTitle"
+        ></div>
+
+        <div
+            id="endingText"
+            class="endingText"
+        ></div>
+
+        <button
+            class="endingButton"
+            onclick="returnToGame()"
+        >
+            返回遊戲
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<script src="memory.js"></script>
+
+</body>
+
+</html>

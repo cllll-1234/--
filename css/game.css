@@ -1,0 +1,30 @@
+.game-page { min-height: 100vh; overflow: hidden; background: #050505; }
+.game-stage { position: relative; min-height: 100vh; overflow: hidden; background-image: linear-gradient(to bottom,rgba(7,7,7,.08),rgba(7,7,7,.44)),url("../images/bg/city.png"); background-position: center; background-size: cover; }
+.game-stage::before { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(90deg,rgba(0,0,0,.34),transparent 32%,transparent 72%,rgba(0,0,0,.18)),linear-gradient(0deg,rgba(0,0,0,.74),transparent 48%); }
+.game-topbar { position: relative; z-index: 6; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; padding: clamp(1.3rem,3vw,2.6rem) clamp(1.25rem,4vw,4.5rem); }
+.chapter-label { max-width: 70vw; color: rgba(232,226,212,.58); font-family: Georgia,"Songti SC",serif; font-size: clamp(.75rem,1vw,.9rem); letter-spacing: .28em; text-transform: uppercase; text-shadow: 0 2px 12px rgba(0,0,0,.8); }
+.chapter-label::before { content: "CHAPTER  /  "; color: rgba(143,48,44,.92); font-size: .68em; letter-spacing: .34em; }
+.game-controls { display: flex; gap: 1.25rem; }
+.game-controls .button { min-height: 34px; padding: .25rem 0; border: 0; color: rgba(232,226,212,.58); background: transparent; font-size: .78rem; letter-spacing: .12em; }
+.game-controls .button:hover, .game-controls .button:focus { color: var(--paper); background: transparent; border: 0; transform: none; }
+.character-layer { position: absolute; z-index: 1; inset: 4% 7% 13%; display: flex; align-items: flex-end; justify-content: flex-end; pointer-events: none; }
+.character-layer img { width: auto; max-width: 62vw; max-height: 91vh; object-fit: contain; object-position: center bottom; filter: drop-shadow(-18px 15px 26px rgba(0,0,0,.52)); animation: character-in .65s ease both; }
+.character-layer img.is-item-image { max-width: min(40vw, 420px); max-height: min(62vh, 620px); margin-bottom: clamp(6rem, 12vh, 9rem); }
+.character-layer img[src=""] { display: none; }
+.dialog-area { position: absolute; z-index: 5; right: 0; bottom: 0; left: 0; min-height: clamp(230px,30vh,340px); padding: clamp(2.7rem,7vh,5.2rem) clamp(1.25rem,8vw,9rem) clamp(1.3rem,3vh,2.5rem); background: linear-gradient(0deg,rgba(0,0,0,.94) 0%,rgba(0,0,0,.86) 52%,rgba(0,0,0,.38) 82%,transparent 100%); }
+.speaker { position: relative; max-width: 800px; margin: 0 0 .7rem; padding-left: 1rem; color: var(--paper); font-size: clamp(1rem,1.5vw,1.25rem); font-weight: 600; line-height: 1.4; letter-spacing: .16em; }
+.speaker::before { content: ""; position: absolute; top: .12em; bottom: .12em; left: 0; width: 2px; background: var(--danger); box-shadow: 0 0 12px rgba(143,48,44,.42); }
+#dialog-box { position: relative; max-width: 980px; min-height: 126px; padding: 0; color: var(--paper); background: transparent; cursor: pointer; }
+#dialog-box:focus-visible { outline: none; }
+#dialog-text { max-width: 800px; min-height: 3.6em; margin: 0; font-size: clamp(1rem,1.45vw,1.22rem); line-height: 1.8; text-shadow: 0 2px 10px rgba(0,0,0,.8); }
+.continue-hint { display: block; width: fit-content; margin: .65rem 0 0 auto; color: rgba(232,226,212,.48); font-size: .7rem; letter-spacing: .18em; animation: quiet-pulse 1.5s infinite; }
+.choices { counter-reset: story-choice; display: grid; max-width: 860px; max-height: min(40vh,360px); margin-top: .65rem; padding-right: .35rem; overflow-y: auto; overscroll-behavior: contain; scrollbar-color: rgba(143,48,44,.7) rgba(255,255,255,.06); scrollbar-width: thin; }
+.choice-button { counter-increment: story-choice; position: relative; display: grid; grid-template-columns: 3.3rem 1fr; grid-template-rows: auto auto; width: 100%; min-height: 68px; padding: .8rem 1rem .8rem .15rem; overflow: hidden; border: 0; border-bottom: 1px solid rgba(255,255,255,.15); color: rgba(232,226,212,.78); background: transparent; text-align: left; letter-spacing: .06em; transition: transform .22s ease,color .22s ease,background .22s ease,padding-left .22s ease; }
+.choice-button:first-child { border-top: 1px solid rgba(255,255,255,.15); }
+.choice-button::before { content: counter(story-choice,decimal-leading-zero); grid-row: 1 / 3; align-self: center; color: rgba(143,48,44,.9); font: .72rem/1 Georgia,serif; letter-spacing: .12em; }
+.choice-button::after { content: "THIS CHOICE WILL SHAPE YOUR PATH"; grid-column: 2; margin-top: .15rem; color: rgba(170,166,155,.5); font: .58rem/1.3 Georgia,serif; letter-spacing: .2em; }
+.choice-button:hover, .choice-button:focus { padding-left: .65rem; color: var(--paper); background: linear-gradient(90deg,rgba(143,48,44,.13),rgba(143,48,44,.025) 62%,transparent); outline: none; transform: translateX(8px); }
+.choice-button:hover::before, .choice-button:focus::before { color: var(--danger-bright); text-shadow: 0 0 12px rgba(143,48,44,.5); }
+.ending-badge { color: rgba(232,226,212,.68); }
+@keyframes character-in { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes quiet-pulse { 50% { opacity: .32; } }

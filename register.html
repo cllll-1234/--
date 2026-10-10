@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>注册 | 进击的巨人</title>
+  <link rel="stylesheet" href="css/common.css"><link rel="stylesheet" href="css/form.css"><link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <header class="site-header"><a class="brand" href="index.html"><span class="brand-mark"><span>墙</span></span>进击的巨人</a><nav><ul><li><a href="index.html">主页</a></li><li><a href="login.html">登录</a></li></ul></nav></header>
+  <main class="form-page">
+    <form id="register-form" class="form-card panel">
+      <header><p class="eyebrow">New Recruit</p><h1>登记身份</h1></header>
+      <div class="form-group"><label for="register-username">用户名</label><input id="register-username" name="username" autocomplete="username" minlength="1" required></div>
+      <div class="form-group"><label for="register-password">密码</label><input id="register-password" name="password" type="password" autocomplete="new-password" minlength="1" required></div>
+      <label class="check-row"><input name="agreement" type="checkbox" required>我同意本课程演示项目的用户协议</label>
+      <p id="form-message" class="form-message" role="status"></p>
+      <div class="form-actions"><button class="button" type="submit">注册</button><a class="button ghost" href="login.html">返回登录</a></div>
+    </form>
+  </main>
+  <script src="js/auth.js"></script>
+</body>
+</html>

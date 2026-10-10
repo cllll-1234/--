@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="description" content="《進擊的巨人：墙内的抉择》原创横版叙事闯关 Demo">
+  <title>城墙阴影下 | 進擊的巨人：墙内的抉择</title>
+  <link rel="stylesheet" href="css/wall-rift-run.css">
+  <link rel="stylesheet" href="css/maneuver-hud.css">
+  <link rel="stylesheet" href="css/achievement-toast.css">
+</head>
+<body>
+  <main id="wrap">
+    <canvas id="game" width="960" height="540" aria-label="横版关卡"></canvas>
+    <header id="hud">
+      <section class="mission"><small>WALL / 01</small><strong id="level">城墙阴影下</strong><span id="objective">在雨墙入口寻找线索</span></section>
+      <section class="records"><span>材料 <b id="materials">0</b>/1</span><span>救援 <b id="rescues">0</b>/3</span><span>裂缝 <b id="repairs">0</b>/3</span><span>剩余 <b id="clock">3:00</b></span><span>失误 <b id="deaths">0</b></span><button class="hud-button" id="pause" type="button" aria-label="暂停">Ⅱ</button><button class="hud-button" id="sound" type="button" aria-label="声音开关">♬</button></section>
+    </header>
+    <div id="toast" aria-live="polite"></div>
+    <div id="achievement-toast" aria-live="polite" aria-atomic="true"></div>
+    <section id="overlay" class="overlay" aria-live="polite"></section>
+    <p class="control-help">A / D 移动 · SPACE 跳跃 · SHIFT 冲刺 · E 互动 · R 重开 · P 暂停</p>
+  </main>
+  <div id="touch" aria-hidden="true"><div><button data-key="left">◀</button><button data-key="right">▶</button></div><div><button data-key="dash">⚡</button><button class="jump" data-key="jump">A</button></div></div>
+  <script src="../../js/settings.js"></script>
+  <script src="js/achievement.js"></script>
+  <script src="js/rpg/maneuver-run.js"></script>
+</body>
+</html>

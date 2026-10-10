@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>结局演出 · 墙内的抉择</title><link rel="stylesheet" href="css/ending-presentation.css"><link rel="stylesheet" href="css/good-epilogue.css?v=reveal-20261010-prompt-original-20261009">
+<link rel="stylesheet" href="css/normal-epilogue.css?v=snow-20261009">
+<link rel="stylesheet" href="css/bad-epilogue.css?v=museum-20261010">
+<link rel="stylesheet" href="css/bad-epilogue.css?v=museum-20261010">
+<link rel="stylesheet" href="css/hidden-epilogue.css?v=hearing-20261010">
+<link rel="stylesheet" href="css/good-ending-dialog.css?v=good-gal-20261010">
+</head>
+<body>
+<main id="player" hidden>
+<div id="backdrop" aria-hidden="true"></div><div class="shade" aria-hidden="true"></div>
+<header class="player-header"><span id="ending-label"></span><span id="preview-label"></span></header>
+<section id="beat" aria-live="polite"><p id="beat-speaker"></p><p id="beat-text"></p></section>
+<nav class="play-controls" aria-label="演出控制">
+<button id="previous">上一幕</button><button id="pause">暂停</button><button id="next">下一幕</button>
+<span id="position"></span><button id="credits">进入片尾</button><a id="edit-link">修改这个结局</a>
+</nav>
+<button id="begin" class="begin" hidden>开始观看</button>
+<div id="fade" aria-hidden="true"></div>
+</main>
+<main id="editor" hidden>
+<header><p class="eyebrow">结局工作台</p><h1 id="editor-title"></h1>
+<p>修改后保存草稿，即可预览。确认后导出文件，替换游戏中同名结局文件。草稿只保存在当前浏览器。</p>
+<nav id="ending-tabs"></nav></header>
+<section class="edit-meta">
+<label>结局标题<input id="edit-title"></label>
+<label>片尾前的引句<input id="edit-subtitle"></label>
+<p id="design-note"></p>
+</section>
+<div id="scene-list"></div>
+<section id="epilogue-editor" hidden></section>
+<footer class="editor-actions">
+<button id="add-beat">增加一幕</button><button id="save-draft">保存草稿</button>
+<a id="preview-draft" target="_blank">预览草稿</a><button id="export">导出正式文件</button>
+<button id="reset-draft">恢复正式版本</button><span id="editor-status" role="status"></span>
+</footer>
+<p class="help">每幕停留时间从文字淡入完成后计时；建议短对白 4–6 秒、旁白 7–9 秒。四个结局统一接入现有片尾，片尾正文另在 credits.html 中修改。</p>
+</main>
+<script src="js/settings.js"></script><script src="js/save.js"></script><script src="js/achievement.js"></script>
+<script src="js/endings/good.js?v=good-gal-20261010"></script><script src="js/endings/normal.js?v=snow-20261009"></script>
+<script src="js/endings/bad.js?v=museum-20261010"></script><script src="js/endings/hidden.js?v=hearing-20261010"></script>
+<script src="js/explore/player-controller.js?v=reiner-gold-20261009"></script><script src="js/endings/good-epilogue.js?v=reveal-20261010-collision-editor-20261010"></script>
+<script src="js/endings/normal-epilogue.js?v=snow-20261009"></script>
+<script src="js/endings/bad-epilogue.js?v=museum-20261010"></script>
+<script src="js/endings/hidden-epilogue.js?v=hearing-20261010"></script>
+<script src="js/endings/good-ending-dialog.js?v=good-enter-20261010"></script>
+<script src="js/ending-presentation.js?v=good-enter-20261010"></script>
+</body></html>
+
+

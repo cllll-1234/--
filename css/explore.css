@@ -1,0 +1,1157 @@
+/* 总部 Explore Mode：缺少正式地图与像素精灵时的可替换 CSS 占位视觉。 */
+[hidden] { display: none !important; }
+
+.game-stage[data-game-mode="explore"] {
+  background-image: radial-gradient(circle at 50% 40%, #30312d 0, #171916 58%, #090a09 100%) !important;
+}
+
+.game-stage[data-game-mode="explore"] .character-layer,
+.game-stage[data-game-mode="explore"] .dialog-area,
+.game-stage[data-game-mode="minigame"] .character-layer,
+.game-stage[data-game-mode="minigame"] .dialog-area { display: none; }
+
+.explore-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #0c0e0c;
+}
+
+.explore-scene::after {
+  content: "";
+  position: absolute;
+  z-index: 50;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.explore-scene.map-transition-pulse::after { animation: map-transition-pulse .44s ease-in-out; }
+
+@keyframes map-transition-pulse {
+  0%, 100% { opacity: 0; }
+  42%, 58% { opacity: 1; }
+}
+
+.explore-world {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: top left;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, transparent 49%, rgba(232, 220, 186, .035) 50%, transparent 51%) 0 0 / 54px 54px,
+    linear-gradient(transparent 49%, rgba(232, 220, 186, .035) 50%, transparent 51%) 0 0 / 54px 54px,
+    radial-gradient(circle at 48% 43%, #4d4b3e, #302f28 62%, #20221e 100%);
+  box-shadow: inset 0 0 110px rgba(0, 0, 0, .82);
+}
+
+.map-layer,
+.collision-layer,
+.npc-layer,
+.object-layer { position: absolute; inset: 0; }
+
+.map-layer {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.explore-world[data-map="street_sermon"] .map-layer {
+  background:
+    linear-gradient(180deg, #24231f 0 15%, transparent 15% 90%, #1e1e1a 90%),
+    linear-gradient(90deg, rgba(108, 91, 64, .28), transparent 18% 82%, rgba(108, 91, 64, .28)),
+    repeating-linear-gradient(8deg, rgba(255, 255, 255, .018) 0 2px, transparent 2px 36px),
+    #5a574b;
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, .58);
+}
+
+.explore-world[data-map="chapter1_ruins"] .map-layer {
+  background:
+    radial-gradient(ellipse at 58% 24%, rgba(38, 28, 22, .7) 0 3%, transparent 3.5%),
+    repeating-linear-gradient(168deg, transparent 0 72px, rgba(20, 16, 14, .2) 73px 78px),
+    linear-gradient(105deg, rgba(84, 72, 58, .2), transparent 32% 68%, rgba(55, 45, 37, .28)),
+    #555249;
+  box-shadow: inset 0 0 150px rgba(0, 0, 0, .72);
+}
+
+.explore-world[data-map="chapter1_ruins"] .collision-block {
+  border-color: #332923;
+  background: repeating-linear-gradient(142deg, #51463c 0 15px, #3e352f 15px 30px);
+}
+
+/* 第七维护站使用正式大地图；不再叠加占位网格或重复家具。 */
+.explore-world.has-map-art[data-map="seventhMaintenanceStation"] { background: #0c0d0c; box-shadow: none; }
+.explore-world.has-map-art[data-map="seventhMaintenanceStation"] .map-layer {
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  box-shadow: none;
+}
+
+.explore-world[data-map="clockTowerUnderground"] .map-layer {
+  background:
+    radial-gradient(circle at 50% 45%, rgba(116, 42, 34, .16), transparent 34%),
+    linear-gradient(rgba(219, 210, 181, .03) 1px, transparent 1px) 0 0 / 36px 36px,
+    linear-gradient(90deg, rgba(219, 210, 181, .03) 1px, transparent 1px) 0 0 / 36px 36px,
+    #252520;
+  box-shadow: inset 0 0 110px rgba(0, 0, 0, .82);
+}
+
+.explore-world.has-map-art[data-map="clockTowerUnderground"] .map-layer {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  box-shadow: none;
+}
+
+.explore-world.has-map-art[data-map="clockTowerUnderground"]:not(.debug-map) .explore-object {
+  display: none;
+}
+
+/* 第五章两张正式地图待补；占位层只承担空间辨识和交互测试。 */
+.explore-world[data-map="centralDistrict"] .map-layer {
+  background:
+    linear-gradient(rgba(224, 216, 190, .035) 1px, transparent 1px) 0 0 / 42px 42px,
+    linear-gradient(90deg, rgba(224, 216, 190, .035) 1px, transparent 1px) 0 0 / 42px 42px,
+    radial-gradient(circle at 50% 48%, #555146, #292b29 76%);
+  box-shadow: inset 0 0 130px rgba(0, 0, 0, .76);
+}
+
+/* 正式中央广场图片由运行时写入 background-image；覆盖上方占位背景简写产生的平铺默认值。 */
+.explore-world.has-map-art[data-map="centralDistrict"] .map-layer {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  box-shadow: none;
+}
+
+/* 第五章中央广场守门者图片槽；正式透明PNG放入约定路径后自动替换。 */
+.explore-world[data-map="centralDistrict"] .object-guardian-boss {
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+  box-sizing: border-box;
+  border: 3px dashed rgba(181, 70, 62, .9);
+  border-radius: 44% 44% 18% 18%;
+  background: rgba(43, 18, 17, .58);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, .64), inset 0 0 32px rgba(144, 44, 38, .3);
+}
+
+.explore-world[data-map="centralDistrict"] .object-guardian-boss::before {
+  content: "BOSS\A图片预留";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: rgba(238, 211, 184, .78);
+  font: 700 12px/1.7 "Microsoft YaHei", sans-serif;
+  letter-spacing: .16em;
+  text-align: center;
+  white-space: pre;
+}
+
+.explore-world.has-map-art[data-map="centralDistrict"] .object-guardian-boss .object-symbol {
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: -24px;
+  color: rgba(238, 214, 186, .9);
+  font: 700 12px/1.2 "Microsoft YaHei", sans-serif;
+  letter-spacing: .16em;
+  text-shadow: 0 2px 5px #000;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.explore-world[data-map="centralDistrict"] .object-guardian-boss.has-object-image {
+  overflow: visible;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  filter: drop-shadow(0 18px 12px rgba(0, 0, 0, .72));
+}
+
+.explore-world[data-map="centralDistrict"] .object-guardian-boss.has-object-image .object-image {
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.explore-world[data-map="centralDistrict"] .object-guardian-boss.has-object-image::before,
+.explore-world.has-map-art[data-map="centralDistrict"] .object-guardian-boss.has-object-image .object-symbol {
+  display: none;
+}
+
+.explore-world[data-map="centralFacility"] .map-layer {
+  background:
+    radial-gradient(circle at 50% 54%, rgba(112, 35, 31, .22), transparent 31%),
+    linear-gradient(rgba(205, 214, 205, .028) 1px, transparent 1px) 0 0 / 34px 34px,
+    linear-gradient(90deg, rgba(205, 214, 205, .028) 1px, transparent 1px) 0 0 / 34px 34px,
+    #202523;
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, .84);
+}
+
+.explore-world[data-map="seventhMaintenanceStation"] .collision-block,
+.explore-world[data-map="clockTowerUnderground"] .collision-block,
+.explore-world[data-map="centralDistrict"] .collision-block,
+.explore-world[data-map="centralFacility"] .collision-block {
+  border-color: #1d1d19;
+  background: repeating-linear-gradient(135deg, #45453d 0 10px, #363730 10px 20px);
+}
+
+.explore-world[data-map="seventhMaintenanceStation"] .object-station-room,
+.explore-world[data-map="clockTowerUnderground"] .object-station-room,
+.explore-world[data-map="centralDistrict"] .object-station-room,
+.explore-world[data-map="centralFacility"] .object-station-room {
+  z-index: 1;
+  border: 1px dashed rgba(223, 209, 166, .32);
+  color: rgba(239, 226, 188, .58);
+  background: rgba(12, 13, 12, .18);
+  box-shadow: none;
+  pointer-events: none;
+}
+
+.explore-world[data-map="seventhMaintenanceStation"] .object-station-clue,
+.explore-world[data-map="clockTowerUnderground"] .object-station-clue,
+.explore-world[data-map="centralDistrict"] .object-station-clue,
+.explore-world[data-map="centralFacility"] .object-station-clue {
+  z-index: 2;
+  border-color: #28271f;
+  background: #5c513d;
+  pointer-events: none;
+}
+
+.object-ruin,
+.object-wagon,
+.object-footprints {
+  display: grid;
+  place-items: center;
+  border: 0;
+  color: rgba(43, 34, 29, .84);
+  background: transparent;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+.object-ruin .object-symbol { font-size: 76px; transform: scaleX(2.4) rotate(-5deg); }
+.object-wagon .object-symbol { color: #241b17; font-size: 66px; transform: scaleX(1.7) rotate(8deg); }
+.object-footprints .object-symbol {
+  color: rgba(47, 38, 31, .62);
+  font-size: 38px;
+  line-height: 2;
+  letter-spacing: .35em;
+  transform: rotate(-20deg);
+}
+.object-ruin .entity-label,
+.object-wagon .entity-label,
+.object-footprints .entity-label { display: none; }
+
+.collision-layer {
+  opacity: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+
+.show-collision-reference .collision-layer { opacity: .68; z-index: 8; }
+.show-collision-reference .collision-block { display: none; }
+
+.collision-block {
+  position: absolute;
+  box-sizing: border-box;
+  border: 3px solid #181914;
+  background: repeating-linear-gradient(135deg, #55513f 0 12px, #494636 12px 24px);
+  box-shadow: inset 0 0 0 2px rgba(220, 202, 151, .1), 0 8px 16px rgba(0, 0, 0, .3);
+}
+
+.collision-block::after {
+  content: attr(data-label);
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(239, 228, 194, .55);
+  font-size: 14px;
+  white-space: nowrap;
+  letter-spacing: .08em;
+}
+
+.explore-player,
+.explore-npc,
+.explore-object {
+  position: absolute;
+  z-index: 4;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.explore-player {
+  left: 0;
+  top: 0;
+  width: 44px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  color: #f0e5c9;
+  font-weight: 800;
+  background: linear-gradient(90deg, #342b25 0 24%, #6a4931 24% 76%, #342b25 76%);
+  border: 2px solid #bdad82;
+  border-radius: 44% 44% 30% 30%;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, .48);
+  will-change: transform;
+}
+
+.explore-player.has-sprite {
+  overflow: visible;
+  border-color: transparent;
+  border-radius: 0;
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
+}
+
+.player-sprite { display: none; }
+
+.explore-player.has-sprite .player-sprite {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: 1px;
+  width: 92px;
+  height: 92px;
+  max-width: none;
+  max-height: none;
+  transform: translateX(-50%);
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 7px 5px rgba(0, 0, 0, .42));
+  pointer-events: none;
+}
+
+/* 酒馆地图的家具尺度更大，仅放大角色贴图；逻辑容器和脚部碰撞框保持不变。 */
+.explore-world[data-map="undergroundTavern"] .explore-player.has-sprite .player-sprite {
+  width: 124px;
+  height: 124px;
+}
+
+.explore-player.has-sprite > span { visibility: hidden; }
+
+.explore-player::before {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 18px;
+  top: -8px;
+  border-radius: 50%;
+  background: #b49470;
+  border: 2px solid #30261f;
+}
+
+.explore-player.has-sprite::before { display: none; }
+
+.explore-player:not(.has-sprite)[data-direction="left"] { border-left-color: #efe1b8; }
+.explore-player:not(.has-sprite)[data-direction="right"] { border-right-color: #efe1b8; }
+.explore-player:not(.has-sprite)[data-direction="up"] { border-top-color: #efe1b8; }
+.explore-player.is-moving { filter: brightness(1.12); }
+
+.explore-npc {
+  display: grid;
+  place-items: center;
+  color: #eee0bd;
+  border: 2px solid #887b5d;
+  border-radius: 48% 48% 30% 30%;
+  background: linear-gradient(#77715c 0 28%, #3b4438 28% 100%);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, .42);
+}
+
+.npc-placeholder { font-weight: 800; text-shadow: 0 2px 2px #000; }
+
+.npc-sprite {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: 0;
+  width: 92px;
+  height: 92px;
+  max-width: none;
+  max-height: none;
+  transform: translateX(-50%);
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 7px 5px rgba(0, 0, 0, .42));
+  pointer-events: none;
+}
+
+.explore-npc.sprite-ready {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+.explore-npc.sprite-ready .npc-sprite { display: block; }
+.explore-npc.sprite-ready .npc-placeholder { visibility: hidden; }
+.explore-npc.sprite-ready .entity-label { bottom: calc(100% + 34px); }
+
+.entity-label {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 3px 8px;
+  color: #eadfbe;
+  background: rgba(10, 11, 10, .84);
+  border: 1px solid rgba(222, 207, 164, .38);
+  border-radius: 2px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.explore-object {
+  display: grid;
+  place-items: center;
+  color: #e8d7ab;
+  border: 3px solid #272319;
+  background: #65583d;
+  box-shadow: inset 0 0 0 3px rgba(221, 199, 143, .12), 0 8px 15px rgba(0, 0, 0, .4);
+}
+
+.object-exit {
+  border-color: #77231f;
+  background: repeating-linear-gradient(90deg, #392b25 0 16px, #2c221e 16px 32px);
+}
+
+.object-symbol { font-size: 27px; font-weight: 900; }
+
+.object-image {
+  display: none;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+  pointer-events: none;
+}
+
+.explore-object.has-object-image .object-image { display: block; }
+.explore-object.has-object-image .object-symbol { display: none; }
+
+.has-map-art .explore-object {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+.has-map-art .explore-object .object-symbol { display: none; }
+.has-map-art .explore-object .entity-label { display: none; }
+
+.trigger-zone-marker {
+  position: absolute;
+  z-index: 2;
+  box-sizing: border-box;
+  border: 2px solid rgba(143, 48, 44, .28);
+  background: radial-gradient(ellipse at center, rgba(126, 43, 37, .15), rgba(34, 30, 24, .06) 68%, transparent 70%);
+  pointer-events: none;
+}
+
+.scene-effect-overlay {
+  position: absolute;
+  z-index: 40;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: rgba(4, 2, 2, .72);
+  pointer-events: none;
+}
+
+.scene-effect-overlay::before {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 5px, rgba(255, 255, 255, .025) 5px 6px),
+    radial-gradient(circle, transparent 12%, rgba(87, 5, 5, .38) 72%, rgba(0, 0, 0, .9));
+  animation: memory-flicker .16s steps(2, end) infinite;
+}
+
+.scene-effect-text {
+  position: relative;
+  z-index: 1;
+  max-width: min(820px, 82vw);
+  color: #eee8dc;
+  font-family: Georgia, "Songti SC", serif;
+  font-size: clamp(1.65rem, 5vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: .18em;
+  text-align: center;
+  white-space: pre-line;
+  text-shadow: 0 0 18px rgba(130, 18, 14, .9), 3px 0 rgba(82, 0, 0, .7), -3px 0 rgba(0, 35, 41, .5);
+  animation: memory-text-in .72s cubic-bezier(.2, .7, .2, 1) both;
+}
+
+.game-stage.effect-sermon-lock .scene-effect-overlay { background: transparent; }
+.game-stage.effect-sermon-lock .scene-effect-overlay::before { display: none; }
+
+.game-stage.effect-flash-start,
+.game-stage.effect-memory-roar,
+.game-stage.effect-collapse { animation: memory-shake .12s linear infinite; }
+.game-stage.effect-titan-encounter { animation: titan-encounter-shake .1s linear infinite; }
+
+.game-stage.effect-flash-start .game-topbar,
+.game-stage.effect-memory-fragment .game-topbar,
+.game-stage.effect-memory-roar .game-topbar,
+.game-stage.effect-collapse .game-topbar,
+.game-stage.effect-chapter-card .game-topbar { opacity: 0; }
+
+.game-stage.effect-memory-fragment .scene-effect-overlay { backdrop-filter: blur(2px) contrast(1.3); }
+.game-stage.effect-subtle-distortion { animation: subtle-distortion .12s steps(2, end) infinite; }
+.game-stage.effect-subtle-distortion .scene-effect-overlay {
+  background: rgba(18, 12, 12, .12);
+  backdrop-filter: contrast(1.12) saturate(.78);
+}
+.game-stage.effect-subtle-distortion .scene-effect-overlay::before { opacity: .16; }
+.game-stage.effect-memory-roar .scene-effect-overlay { background: rgba(24, 0, 0, .88); }
+.game-stage.effect-memory-roar .scene-effect-text { transform: scale(1.08); }
+.game-stage.effect-collapse .scene-effect-overlay { background: rgba(0, 0, 0, .68); backdrop-filter: blur(7px) saturate(.45); }
+.game-stage.effect-titan-encounter .scene-effect-overlay { background: rgba(18, 0, 0, .38); }
+.game-stage.effect-titan-encounter .scene-effect-overlay::before { opacity: .28; }
+.game-stage.effect-titan-encounter .scene-effect-text { color: #d9c7af; transform: scale(1.08); }
+.game-stage.effect-chapter-card .scene-effect-overlay { background: #050505; }
+.game-stage.effect-chapter-card .scene-effect-overlay::before { opacity: .22; }
+.game-stage.effect-chapter-card .scene-effect-text { color: #ded5bf; font-size: clamp(1.6rem, 4vw, 3.5rem); letter-spacing: .25em; }
+
+@keyframes memory-shake {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(-3px, 2px, 0); }
+  50% { transform: translate3d(3px, -2px, 0); }
+  75% { transform: translate3d(-2px, -1px, 0); }
+}
+
+@keyframes subtle-distortion {
+  0%, 100% { transform: translateX(0); filter: none; }
+  35% { transform: translateX(-1px); filter: hue-rotate(-3deg); }
+  70% { transform: translateX(1px); filter: hue-rotate(3deg); }
+}
+
+@keyframes titan-encounter-shake {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  20% { transform: translate3d(-7px, 3px, 0); }
+  40% { transform: translate3d(6px, -4px, 0); }
+  60% { transform: translate3d(-4px, -2px, 0); }
+  80% { transform: translate3d(5px, 3px, 0); }
+}
+
+@keyframes memory-flicker {
+  0% { opacity: .82; transform: translateX(-1px); }
+  50% { opacity: 1; transform: translateX(2px); }
+  100% { opacity: .72; transform: translateX(0); }
+}
+
+@keyframes memory-text-in {
+  0% { opacity: 0; filter: blur(12px); transform: scale(1.14); }
+  45% { opacity: 1; filter: blur(1px); }
+  100% { opacity: .92; filter: blur(0); transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-stage.effect-flash-start,
+  .game-stage.effect-memory-roar,
+  .game-stage.effect-collapse,
+  .game-stage.effect-titan-encounter,
+  .scene-effect-overlay::before,
+  .scene-effect-text { animation: none; }
+}
+
+
+.explore-objective {
+  position: absolute;
+  z-index: 12;
+  top: 78px;
+  left: 24px;
+  max-width: min(420px, calc(100% - 48px));
+  padding: 12px 18px;
+  border-left: 4px solid #8b2824;
+  color: #eee4c8;
+  background: rgba(12, 13, 12, .88);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+  pointer-events: none;
+}
+
+.explore-objective span {
+  display: block;
+  margin-bottom: 4px;
+  color: #ac9e79;
+  font-size: 12px;
+  letter-spacing: .16em;
+}
+
+.explore-objective strong {
+  display: block;
+  white-space: pre-line;
+  line-height: 1.5;
+}
+
+.interaction-prompt {
+  position: absolute;
+  z-index: 14;
+  left: 50%;
+  bottom: 38px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  max-width: calc(100% - 32px);
+  padding: 11px 20px 11px 12px;
+  border: 1px solid rgba(185, 161, 104, .65);
+  border-radius: 2px;
+  color: #eadfbd;
+  background: repeating-linear-gradient(112deg, transparent 0 3px, rgba(229, 212, 159, .018) 3px 4px), linear-gradient(135deg, rgba(36, 37, 29, .97), rgba(12, 15, 12, .97));
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .5), inset 0 1px rgba(236, 219, 174, .15), inset 0 -1px rgba(0, 0, 0, .65), inset 0 0 0 4px rgba(7, 10, 7, .38);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+  letter-spacing: .04em;
+  backdrop-filter: blur(8px);
+  transition: border-color .2s ease, box-shadow .2s ease;
+  cursor: pointer;
+}
+
+.interaction-prompt::before, .interaction-prompt::after { content: ""; position: absolute; width: 7px; height: 7px; pointer-events: none; border-color: rgba(213, 190, 128, .75); border-style: solid; }
+.interaction-prompt::before { top: 4px; left: 4px; border-width: 1px 0 0 1px; }
+.interaction-prompt::after { right: 4px; bottom: 4px; border-width: 0 1px 1px 0; }
+.interaction-prompt kbd { display: grid; place-items: center; flex-shrink: 0; min-width: 30px; height: 30px; padding: 0 7px; border: 1px solid rgba(190, 167, 111, .56); border-bottom-color: #6e6040; border-radius: 2px; color: #e4d4a6; background: linear-gradient(#39382b, #20231b); box-shadow: inset 0 1px rgba(235, 219, 166, .12), 0 2px 2px rgba(0, 0, 0, .35); font: 400 .9em/1 Georgia, serif; }
+.interaction-prompt .interaction-label { min-width: 0; text-align: left; line-height: 1.5; }
+.interaction-prompt:hover { border-color: #c9b078; box-shadow: 0 8px 26px rgba(0, 0, 0, .55), inset 0 1px rgba(242, 225, 176, .22), inset 0 0 0 4px rgba(194, 170, 109, .05); }
+.interaction-prompt:focus-visible { outline: 2px solid #dcc58b; outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { .interaction-prompt { transition: none; } }
+
+.evidence-toast {
+  position: absolute;
+  z-index: 18;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 40px);
+  padding: 12px 20px;
+  color: #f2e7c7;
+  background: rgba(22, 24, 20, .95);
+  border: 1px solid #887c5d;
+  text-align: center;
+}
+
+.evidence-toast[data-kind="evidence"] { border-color: #b79543; }
+.evidence-toast[data-kind="warning"] { border-color: #9e302a; }
+
+.mobile-controls { display: none; }
+
+@media (max-width: 768px), (pointer: coarse) {
+  .mobile-controls {
+    position: absolute;
+    z-index: 20;
+    inset: auto 14px 18px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    pointer-events: none;
+  }
+
+  .direction-pad {
+    display: grid;
+    grid-template-columns: repeat(3, 48px);
+    grid-template-rows: repeat(2, 48px);
+    gap: 5px;
+    pointer-events: auto;
+  }
+
+  .move-button,
+  .mobile-interact {
+    border: 1px solid rgba(230, 218, 184, .62);
+    color: #f0e5c8;
+    background: rgba(24, 26, 22, .78);
+    touch-action: none;
+    user-select: none;
+  }
+
+  .move-button:active,
+  .mobile-interact:active { background: rgba(124, 41, 34, .9); }
+  .move-button.up { grid-column: 2; }
+  .move-button.left { grid-column: 1; grid-row: 2; }
+  .move-button.down { grid-column: 2; grid-row: 2; }
+  .move-button.right { grid-column: 3; grid-row: 2; }
+
+  .mobile-interact {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    pointer-events: auto;
+  }
+
+  .interaction-prompt { bottom: 112px; }
+  .explore-objective { top: 68px; left: 12px; padding: 9px 12px; }
+}
+
+
+/* 第二章地下街：原图按 naturalWidth / naturalHeight 作为世界尺寸，不使用 cover。 */
+.explore-world.has-map-art[data-map="undergroundStreet"] {
+  overflow: visible;
+  background: #171512;
+  box-shadow: none;
+}
+
+.explore-world.has-map-art[data-map="undergroundStreet"] .map-layer {
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.explore-world[data-map="chapter1_ruins"] .object-titan {
+  display: grid;
+  place-items: center;
+  color: rgba(229,218,194,.68);
+  border: 1px dashed rgba(100,80,68,.5);
+  background: rgba(69,55,47,.4);
+  pointer-events: none;
+}
+.explore-world[data-map="chapter1_ruins"] .object-titan .object-symbol { font-size: 22px; }
+
+/* 新版旧城区：正式地图、尸体临时占位与可选坐标调试层。 */
+.explore-world.has-map-art[data-map="chapter1_ruins"] {
+  background: #282a25;
+  box-shadow: inset 0 0 90px rgba(0, 0, 0, .42);
+}
+
+.explore-world.has-map-art[data-map="chapter1_ruins"] .map-layer {
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.explore-world.has-map-art[data-map="chapter1_ruins"] .object-titan {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 3px dashed rgba(196, 172, 130, .78);
+  border-radius: 48% 44% 42% 46%;
+  color: rgba(236, 222, 194, .9);
+  background:
+    repeating-linear-gradient(155deg, rgba(118, 88, 69, .82) 0 18px, rgba(76, 58, 49, .88) 18px 36px),
+    rgba(40, 31, 27, .9);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .48), inset 0 0 28px rgba(0, 0, 0, .36);
+  transform: rotate(-8deg);
+}
+
+.explore-world.has-map-art[data-map="chapter1_ruins"] .object-titan .object-symbol {
+  display: block;
+  font-size: 25px;
+  letter-spacing: .08em;
+  text-shadow: 0 2px 6px #000;
+}
+
+.explore-world.has-map-art[data-map="chapter1_ruins"] .object-titan .entity-label { display: none; }
+
+.explore-world.has-map-art[data-map="chapter1_ruins"] .object-titan.has-object-image {
+  overflow: visible;
+  border-color: transparent;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.explore-world.debug-oldtown .collision-layer {
+  z-index: 8;
+  opacity: 1;
+}
+
+.explore-world.debug-map .collision-layer {
+  z-index: 8;
+  opacity: 1;
+}
+
+.explore-world.debug-map .collision-block {
+  border: 2px solid rgba(255, 56, 56, .96);
+  background: rgba(255, 35, 35, .28);
+  box-shadow: none;
+}
+
+.explore-world.debug-map .collision-block::after {
+  color: #fff;
+  font: 11px/1.2 Consolas, monospace;
+  text-shadow: 0 1px 3px #000;
+}
+
+.explore-world.debug-map .explore-player {
+  z-index: 12;
+  outline: 2px solid #45b9ff;
+  outline-offset: 0;
+}
+
+.explore-world.debug-map .explore-player::after {
+  content: "30×17";
+  position: absolute;
+  z-index: 13;
+  left: 7px;
+  top: 38px;
+  width: 30px;
+  height: 17px;
+  box-sizing: border-box;
+  border: 2px solid #42ff78;
+  color: #fff;
+  background: rgba(20, 225, 80, .2);
+  font: 8px/13px Consolas, monospace;
+  text-align: center;
+  text-shadow: 0 1px 2px #000;
+  pointer-events: none;
+}
+
+.explore-world.debug-oldtown .collision-block {
+  border: 2px solid rgba(255, 42, 42, .95);
+  background: rgba(255, 30, 30, .3);
+  box-shadow: none;
+}
+
+.explore-world.debug-oldtown .collision-block::after {
+  color: #fff;
+  font-size: 11px;
+  text-shadow: 0 1px 3px #000;
+}
+
+.explore-world.debug-oldtown .explore-npc {
+  outline: 4px solid rgba(190, 72, 255, .92);
+  outline-offset: 3px;
+}
+
+.oldtown-debug-marker {
+  position: absolute;
+  z-index: 9;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  color: #fff;
+  font: 700 12px/1.25 Consolas, monospace;
+  text-align: center;
+  text-shadow: 0 1px 3px #000;
+  pointer-events: none;
+}
+
+.oldtown-debug-marker.debug-inspect {
+  border: 3px solid #ffe04d;
+  border-radius: 50%;
+  background: rgba(255, 224, 77, .25);
+}
+
+.oldtown-debug-marker.debug-minigame {
+  border: 3px solid #36a8ff;
+  background: rgba(30, 139, 255, .27);
+}
+
+.oldtown-debug-marker.debug-corpse {
+  border: 3px solid #4be378;
+  background: rgba(51, 215, 103, .25);
+}
+
+.oldtown-debug-marker.debug-stage {
+  border: 2px dashed rgba(190, 72, 255, .9);
+  background: rgba(160, 58, 215, .16);
+}
+
+.oldtown-debug-marker.debug-interaction {
+  border: 2px dashed #35e6ff;
+  background: rgba(30, 202, 235, .24);
+}
+
+.oldtown-debug-marker.debug-hidden-interaction {
+  border-style: dotted;
+  border-color: rgba(255, 224, 77, .9);
+  background: rgba(255, 224, 77, .12);
+}
+
+.oldtown-debug-marker.debug-exit-interaction {
+  border-color: #77ff9a;
+  background: rgba(75, 227, 120, .14);
+}
+
+.interaction-radius-marker {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  box-sizing: border-box;
+  border: 2px dashed rgba(53, 230, 255, .72);
+  border-radius: 50%;
+  background: rgba(53, 230, 255, .06);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.oldtown-debug-readout {
+  position: absolute;
+  z-index: 30;
+  top: 126px;
+  right: 22px;
+  min-width: 180px;
+  margin: 0;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, .5);
+  color: #fff;
+  background: rgba(0, 0, 0, .82);
+  font: 14px/1.55 Consolas, monospace;
+  box-sizing: border-box;
+  pointer-events: auto;
+}
+.oldtown-debug-readout .debug-readout-values {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  white-space: pre-wrap;
+}
+
+#oldtown-editor-panel {
+  position: absolute;
+  z-index: 40;
+  right: 22px;
+  bottom: 24px;
+  width: min(390px, calc(100% - 44px));
+  padding: 14px;
+  border: 1px solid #d7bd72;
+  color: #f4ead0;
+  background: rgba(16, 13, 11, .94);
+  font: 13px/1.45 Consolas, monospace;
+}
+
+#oldtown-editor-panel strong, #oldtown-editor-panel small { display: block; margin-bottom: 7px; }
+#oldtown-editor-panel small { color: #c8b98e; }
+#oldtown-editor-panel pre { min-height: 58px; margin: 8px 0; white-space: pre-wrap; }
+#oldtown-editor-panel button { margin: 0 7px 7px 0; padding: 6px 10px; cursor: pointer; }
+#map-editor-radius-controls {
+  margin: 0 0 10px;
+  padding: 9px;
+  border: 1px solid rgba(53, 230, 255, .55);
+  background: rgba(30, 202, 235, .1);
+}
+#map-editor-radius-controls label { display: block; margin-bottom: 7px; color: #8cefff; }
+#map-editor-radius-controls input {
+  width: 74px;
+  margin: 0 7px 7px 0;
+  padding: 6px 7px;
+  border: 1px solid #8cefff;
+  color: #fff;
+  background: #171b1b;
+  font: inherit;
+}
+
+#warehouse-debug-panel {
+  position: absolute;
+  z-index: 42;
+  left: 18px;
+  bottom: 20px;
+  width: min(360px, calc(100% - 36px));
+  max-height: calc(100% - 190px);
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 13px;
+  border: 1px solid #d7bd72;
+  color: #f4ead0;
+  background: rgba(16, 13, 11, .94);
+  font: 13px/1.45 Consolas, monospace;
+}
+#warehouse-debug-panel strong, #warehouse-debug-panel small { display: block; margin-bottom: 7px; }
+#warehouse-debug-panel small { color: #c8b98e; }
+#warehouse-debug-panel details { margin: 8px 0; border-top: 1px solid rgba(215, 189, 114, .25); padding-top: 7px; }
+#warehouse-debug-panel summary { margin-bottom: 7px; cursor: pointer; color: #8cefff; }
+#warehouse-debug-panel button { margin: 0 6px 6px 0; padding: 5px 8px; cursor: pointer; }
+#warehouse-debug-flags { display: grid; gap: 4px; }
+#warehouse-debug-flags label { display: flex; align-items: center; gap: 7px; overflow-wrap: anywhere; }
+#warehouse-debug-flags input { accent-color: #35e6ff; }
+#maintenance-station-debug-panel {
+  position: absolute;
+  z-index: 42;
+  left: 18px;
+  bottom: 20px;
+  width: min(380px, calc(100% - 36px));
+  max-height: calc(100% - 190px);
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 13px;
+  border: 1px solid #d7bd72;
+  color: #f4ead0;
+  background: rgba(16, 13, 11, .94);
+  font: 13px/1.45 Consolas, monospace;
+}
+#maintenance-station-debug-panel strong,
+#maintenance-station-debug-panel small { display: block; margin-bottom: 7px; }
+#maintenance-station-debug-panel small { color: #c8b98e; }
+#maintenance-station-debug-panel details { margin: 8px 0; border-top: 1px solid rgba(215, 189, 114, .25); padding-top: 7px; }
+#maintenance-station-debug-panel summary { margin-bottom: 7px; cursor: pointer; color: #8cefff; }
+#maintenance-station-debug-panel button { margin: 0 6px 6px 0; padding: 5px 8px; cursor: pointer; }
+#maintenance-station-debug-panel .station-debug-link {
+  display: inline-block;
+  margin: 0 6px 6px 0;
+  padding: 5px 8px;
+  border: 1px solid #8cefff;
+  color: #8cefff;
+  text-decoration: none;
+}
+.debug-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: -6px -5px 8px;
+  padding: 6px 5px 8px;
+  border-bottom: 1px solid rgba(215, 189, 114, .3);
+  cursor: move;
+  touch-action: none;
+  user-select: none;
+}
+.debug-panel-header strong { margin: 0 !important; }
+.debug-panel-controls { display: flex; flex: 0 0 auto; gap: 4px; }
+.debug-panel-controls button {
+  min-width: 28px;
+  margin: 0 !important;
+  padding: 2px 6px !important;
+  color: #f4ead0;
+  border: 1px solid rgba(215, 189, 114, .55);
+  background: rgba(0, 0, 0, .4);
+}
+.debug-panel-dragging { opacity: .88; }
+.debug-panel-collapsed { width: auto !important; min-width: 230px; max-height: none !important; overflow: hidden !important; }
+.debug-panel-collapsed .debug-panel-body { display: none; }
+.debug-panel-collapsed .debug-panel-header { margin-bottom: -6px; border-bottom: 0; }
+#debug-panel-restore-dock {
+  position: absolute;
+  z-index: 60;
+  top: 76px;
+  left: 50%;
+  display: none;
+  gap: 8px;
+  transform: translateX(-50%);
+  pointer-events: auto;
+}
+
+.explore-scene.map-debug-active #debug-panel-restore-dock { display: flex; }
+.debug-panel-restore {
+  padding: 7px 11px;
+  border: 1px solid #d7bd72;
+  color: #f4ead0;
+  background: rgba(16, 13, 11, .94);
+  cursor: pointer;
+}
+.debug-panel-restore.is-panel-hidden { border-color: #8cefff; color: #8cefff; }
+.explore-world.debug-hide-collisions .collision-layer { opacity: 0 !important; }
+.explore-world.debug-hide-interactions .oldtown-debug-marker.debug-interaction { display: none; }
+.explore-world.debug-hide-player-boxes .explore-player { outline: 0; }
+.explore-world.debug-hide-player-boxes .explore-player::after { display: none; }
+
+/* 第二章旧教堂：布局和家具均为可替换的 CSS 占位层。 */
+.explore-world[data-map="oldChurch"] { background: #24241f; }
+.explore-world[data-map="oldChurch"] .map-layer {
+  background:
+    repeating-linear-gradient(0deg, transparent 0 39px, rgba(0, 0, 0, .11) 40px 42px),
+    repeating-linear-gradient(90deg, transparent 0 79px, rgba(226, 212, 167, .055) 80px 82px),
+    radial-gradient(ellipse at 50% 74%, #555146, #33342f 72%, #24241f);
+  box-shadow: inset 0 0 110px rgba(0, 0, 0, .75);
+}
+.explore-world.has-map-art[data-map="oldChurch"] .map-layer {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  box-shadow: none;
+}
+.explore-world.has-map-art[data-map="oldChurch"] .explore-object { display: none; }
+.explore-world[data-map="oldChurch"] .explore-object { box-sizing: border-box; pointer-events: none; }
+.explore-world[data-map="oldChurch"] .explore-object .entity-label { display: none; }
+.explore-world[data-map="oldChurch"] .object-church-zone-back,
+.explore-world[data-map="oldChurch"] .object-church-zone-storage,
+.explore-world[data-map="oldChurch"] .object-church-zone-altar,
+.explore-world[data-map="oldChurch"] .object-church-zone-nave {
+  display: block; padding: 18px; border: 1px dashed rgba(215, 190, 139, .22);
+  box-shadow: none; background: rgba(102, 82, 61, .14); color: rgba(239, 220, 170, .64);
+  font: 18px/1.3 Georgia, serif; letter-spacing: .08em;
+}
+.explore-world[data-map="oldChurch"] .object-church-zone-back { background: rgba(75, 91, 83, .2); }
+.explore-world[data-map="oldChurch"] .object-church-zone-storage { background: rgba(95, 70, 49, .2); }
+.explore-world[data-map="oldChurch"] .object-church-zone-altar { background: rgba(98, 75, 55, .21); }
+.explore-world[data-map="oldChurch"] .object-church-zone-nave { background: rgba(143, 126, 96, .08); }
+.explore-world[data-map="oldChurch"] .object-church-zone-back .object-symbol,
+.explore-world[data-map="oldChurch"] .object-church-zone-storage .object-symbol,
+.explore-world[data-map="oldChurch"] .object-church-zone-altar .object-symbol,
+.explore-world[data-map="oldChurch"] .object-church-zone-nave .object-symbol { font: inherit; }
+.explore-world[data-map="oldChurch"] .object-church-wall {
+  border: 3px solid #171711; background: repeating-linear-gradient(90deg, #48473d 0 22px, #3d3b33 22px 44px);
+  box-shadow: inset 0 0 0 2px #5c5848, 0 5px 15px #171711;
+}
+.explore-world[data-map="oldChurch"] .object-church-wall .object-symbol { display: none; }
+.explore-world[data-map="oldChurch"] .object-church-pew {
+  border: 5px solid #281b14; border-radius: 7px;
+  background: repeating-linear-gradient(0deg, #6e4a2d 0 12px, #4b311e 13px 20px);
+  color: #f1d6a0; box-shadow: 0 10px 8px #171711aa;
+}
+.explore-world[data-map="oldChurch"] .object-church-shelf {
+  border: 6px solid #251b15; background: repeating-linear-gradient(0deg, #4e3625 0 35px, #2d2018 36px 42px);
+}
+.explore-world[data-map="oldChurch"] .object-church-crate {
+  border: 8px ridge #765438; background: repeating-linear-gradient(90deg, #62452b 0 25px, #503821 25px 30px);
+}
+.explore-world[data-map="oldChurch"] .object-church-altar {
+  border: 7px double #90826a; border-radius: 8px; background: #4e4c49;
+}
+.explore-world[data-map="oldChurch"] .object-church-cabinet {
+  border: 8px ridge #5d402b; background: repeating-linear-gradient(90deg, #3b291e 0 42px, #241a16 43px 48px);
+}
+.explore-world[data-map="oldChurch"] .object-church-bed {
+  border: 8px solid #49382d; border-radius: 8px; background: repeating-linear-gradient(90deg, #776f60 0 54px, #45332b 55px 69px);
+}
+.explore-world[data-map="oldChurch"] .object-church-sink { border: 8px solid #5b6059; border-radius: 30%; background: #a5a59a; color: #303733; }
+.explore-world[data-map="oldChurch"] .object-church-pew .object-symbol,
+.explore-world[data-map="oldChurch"] .object-church-shelf .object-symbol,
+.explore-world[data-map="oldChurch"] .object-church-crate .object-symbol,
+.explore-world[data-map="oldChurch"] .object-church-altar .object-symbol,
+.explore-world[data-map="oldChurch"] .object-church-cabinet .object-symbol,
+.explore-world[data-map="oldChurch"] .object-church-bed .object-symbol,
+.explore-world[data-map="oldChurch"] .object-church-sink .object-symbol { font-size: 14px; text-align: center; }
+.explore-world[data-map="oldChurch"] .object-church-small,
+.explore-world[data-map="oldChurch"] .object-church-emblem,
+.explore-world[data-map="oldChurch"] .object-church-tracks,
+.explore-world[data-map="oldChurch"] .object-church-vial,
+.explore-world[data-map="oldChurch"] .object-church-exit {
+  border: 1px dashed rgba(240, 211, 144, .45); box-shadow: none; background: rgba(22, 23, 20, .62);
+}
+.explore-world[data-map="oldChurch"] .object-church-small .object-symbol,
+.explore-world[data-map="oldChurch"] .object-church-emblem .object-symbol,
+.explore-world[data-map="oldChurch"] .object-church-tracks .object-symbol,
+.explore-world[data-map="oldChurch"] .object-church-vial .object-symbol,
+.explore-world[data-map="oldChurch"] .object-church-exit .object-symbol { font-size: 13px; text-align: center; }
+.explore-world[data-map="oldChurch"] .object-church-vial { color: #b3e2d3; }
+.explore-world[data-map="oldChurch"] .object-church-tracks { color: #c2b39d; background: transparent; }
+.explore-world[data-map="oldChurch"] .object-church-exit { color: #c9e9c9; }
+
+#old-church-debug-panel {
+  position: absolute; z-index: 42; left: 18px; bottom: 20px; width: min(350px, calc(100% - 36px));
+  box-sizing: border-box; padding: 13px; border: 1px solid #d7bd72; color: #f4ead0;
+  background: rgba(16, 13, 11, .94); font: 13px/1.45 Consolas, monospace;
+}
+#old-church-debug-panel strong, #old-church-debug-panel small { display: block; margin-bottom: 7px; }
+#old-church-debug-panel small { color: #c8b98e; }
+#old-church-debug-panel button { margin: 0 5px 6px 0; padding: 5px 8px; cursor: pointer; }
+#old-church-debug-panel label { display: inline-flex; gap: 4px; align-items: center; margin: 0 10px 8px 0; }
+.debug-oldtown .oldtown-editable,
+.debug-map .oldtown-editable { pointer-events: auto; cursor: move; }
+.debug-oldtown .oldtown-editable::before,
+.debug-map .oldtown-editable::before {
+  content: "";
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  width: 15px;
+  height: 15px;
+  border: 2px solid #fff;
+  background: #111;
+  cursor: nwse-resize;
+}
+.debug-oldtown .oldtown-editable.editor-selected,
+.debug-map .oldtown-editable.editor-selected { outline: 4px solid #fff; outline-offset: 2px; }

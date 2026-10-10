@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>档案复原 MiniGame Debug</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/archive-restoration.css">
+  <style>
+    body{min-height:100vh;display:grid;place-items:center;background:#0b0c0b;color:#e8dcc2}
+    .archive-debug-menu{width:min(760px,calc(100% - 32px));padding:28px;border:1px solid #8f7650;background:#17140f;box-shadow:0 18px 60px #000}
+    .archive-debug-menu h1{margin-top:0;font-family:Georgia,"Microsoft YaHei",serif}
+    .archive-debug-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:20px 0}
+    .archive-debug-grid button,.archive-debug-menu a{padding:11px 14px;border:1px solid #9b8765;color:#eadfc7;background:#29241d;cursor:pointer;text-decoration:none;font:700 14px/1.4 "Microsoft YaHei",sans-serif}
+    #archive-debug-status{min-height:24px;color:#8ed4dd}
+    @media(max-width:600px){.archive-debug-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <main class="archive-debug-menu">
+    <p>CHAPTER 03 / DEBUG</p>
+    <h1>档案复原 MiniGame</h1>
+    <p>以下入口使用独立测试存档，不会污染正式剧情存档。</p>
+    <div class="archive-debug-grid">
+      <button type="button" data-archive-stage="select">从阶段一开始</button>
+      <button type="button" data-archive-stage="puzzle">直接进入拼图阶段</button>
+      <button type="button" data-archive-stage="anomaly">直接进入异常标记阶段</button>
+      <button type="button" data-archive-stage="reasoning">直接进入推理阶段</button>
+      <button type="button" data-archive-stage="complete">模拟已完成状态</button>
+      <button type="button" id="archive-debug-clear">清除小游戏测试存档</button>
+      <a href="debug-archive-puzzle-assets.html">对比母版与拼合碎片</a>
+    </div>
+    <p id="archive-debug-status" role="status"></p>
+    <a href="debug-seventh-maintenance-station.html">返回第七维护站 Debug</a>
+  </main>
+  <script src="js/minigame-manager.js"></script>
+  <script src="js/chapter3-archive-puzzle.js"></script>
+  <script src="js/minigames/archive-restoration.js"></script>
+  <script src="js/minigames/archive-restoration-debug.js"></script>
+</body>
+</html>

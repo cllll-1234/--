@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="theme-color" content="#080b0e">
+  <meta name="description" content="原创剧情向横版巨人 Boss 战：立体机动、巨人化对抗与后颈处决。">
+  <title>最终之战 · 巨人 Boss 战</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23080b0e'/%3E%3Cpath d='M13 50V25h8v-8h8v8h6v-8h8v8h8v25z' fill='%23bda16b'/%3E%3Cpath d='M29 50V35h6v15' fill='%23080b0e'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="boss.css?v=22">
+</head>
+<body data-autostart="true" data-difficulty="hard">
+  <main id="battle">
+    <canvas id="game" aria-label="最终之战 Boss 战"></canvas>
+    <section id="hud" aria-live="polite">
+      <div class="plate left">
+        <div class="phase" id="phase">Ⅰ 立体机动</div>
+        <div class="mission-progress" aria-label="作战阶段"><i class="active"></i><i></i><i></i></div>
+        <div class="meta meta-time">
+          <span>作战用时</span><b id="timer">0:00</b>
+        </div>
+      </div>
+      <div class="boss-name"><small></small><strong>兽之巨人</strong><div class="bar hp"><i id="boss-hp-fill"></i><span id="boss-hp-text">兽之巨人 100 / 100</span></div></div>
+      <div class="plate right">
+        <div class="bar poise"><i id="poise-fill"></i><span id="poise-text">装甲架势 0 / 100</span></div>
+        <div class="bar life"><i id="player-hp-fill"></i><span id="player-hp-text">生命 100 / 100</span></div>
+        <div class="bar resource"><i id="resource-fill"></i><span id="resource-text">钩索 ∞</span></div>
+      </div>
+      <div id="objective" aria-hidden="true"></div>
+      <p id="controls"><b>A / D</b> 移动　<b>Space</b> 跳跃/脱钩　<b>Shift</b> 无敌闪避　<b>Q / E</b> 发射钩索　<b>S</b> 脱钩　<b>J</b> 斩击　<b>R</b> 巨人化</p>
+    </section>
+    <section id="briefing" class="briefing" aria-labelledby="briefing-title">
+      <div class="briefing-card">
+        <p class="eyebrow">最终之战 · 城门前线</p>
+        <h1 id="briefing-title">最终之战</h1>
+        <p class="briefing-copy">兽之巨人挡在城门前。活过三段作战，击破装甲架势，绕到后颈完成最后处决。本场战斗只能变身巨人一次，请把握时机。</p>
+        <div class="orders">
+          <article><b>01</b><span>立体机动<br>A / D 移动 · Q / E 钩索</span></article><article><b>02</b><span>巨人对抗<br>R 变身（本场仅一次）· J 快攻 · K 重击 · L 格挡</span></article><article><b>03</b><span>后颈处决<br>绕背后按 J / F 完成 QTE</span></article>
+        </div>
+        <div class="key-guide"><span><b>Space</b> 跳跃 / QTE</span><span><b>Shift</b> 闪避</span><span><b>S</b> 脱钩</span></div>
+        <button id="start-button" type="button">开始最终战</button>
+      </div>
+    </section>
+    <div id="touch" aria-label="触控操作">
+      <div><button data-code="KeyA">←</button><button data-code="KeyD">→</button><button data-code="Space">跳</button><button data-code="ShiftLeft">闪</button></div>
+      <div><button data-code="KeyQ">左钩</button><button data-code="KeyE">右钩</button><button data-code="KeyJ">斩</button><button data-code="KeyK">重</button><button data-code="KeyL">挡</button><button data-code="KeyR">变</button></div>
+    </div>
+  </main>
+  <script src="js/boss-v2/config.js?v=22"></script><script src="js/boss-v2/engine.js?v=22"></script><script src="js/boss-v2/view.js?v=22"></script><script src="js/story-bridge.js"></script><script src="js/boss-v2/main.js?v=22"></script>
+</body>
+</html>
+

@@ -1,0 +1,149 @@
+#normal-epilogue .game-topbar{ position: relative; z-index: 6; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; padding: clamp(1.3rem,3vw,2.6rem) clamp(1.25rem,4vw,4.5rem); }
+#normal-epilogue .chapter-label{ max-width: 70vw; color: rgba(232,226,212,.58); font-family: Georgia,"Songti SC",serif; font-size: clamp(.75rem,1vw,.9rem); letter-spacing: .28em; text-transform: uppercase; text-shadow: 0 2px 12px rgba(0,0,0,.8); }
+#normal-epilogue .chapter-label::before{ content: "CHAPTER  /  "; color: rgba(143,48,44,.92); font-size: .68em; letter-spacing: .34em; }
+#normal-epilogue .game-controls{ display: flex; gap: 1.25rem; }
+#normal-epilogue .game-controls .button{ min-height: 34px; padding: .25rem 0; border: 0; color: rgba(232,226,212,.58); background: transparent; font-size: .78rem; letter-spacing: .12em; }
+#normal-epilogue .game-controls .button:hover,#normal-epilogue .game-controls .button:focus{ color: var(--paper); background: transparent; border: 0; transform: none; }
+#normal-epilogue .character-layer{ position: absolute; z-index: 1; inset: 4% 7% 13%; display: flex; align-items: flex-end; justify-content: flex-end; pointer-events: none; }
+#normal-epilogue .character-layer img{ width: auto; max-width: 62vw; max-height: 91vh; object-fit: contain; object-position: center bottom; filter: drop-shadow(-18px 15px 26px rgba(0,0,0,.52)); animation: character-in .65s ease both; }
+#normal-epilogue .character-layer img.is-item-image{ max-width: min(40vw, 420px); max-height: min(62vh, 620px); margin-bottom: clamp(6rem, 12vh, 9rem); }
+#normal-epilogue .character-layer img[src=""]{ display: none; }
+#normal-epilogue .dialog-area{ position: absolute; z-index: 5; right: 0; bottom: 0; left: 0; min-height: clamp(230px,30vh,340px); padding: clamp(2.7rem,7vh,5.2rem) clamp(1.25rem,8vw,9rem) clamp(1.3rem,3vh,2.5rem); background: linear-gradient(0deg,rgba(0,0,0,.94) 0%,rgba(0,0,0,.86) 52%,rgba(0,0,0,.38) 82%,transparent 100%); }
+#normal-epilogue .speaker{ position: relative; max-width: 800px; margin: 0 0 .7rem; padding-left: 1rem; color: var(--paper); font-size: clamp(1rem,1.5vw,1.25rem); font-weight: 600; line-height: 1.4; letter-spacing: .16em; }
+#normal-epilogue .speaker::before{ content: ""; position: absolute; top: .12em; bottom: .12em; left: 0; width: 2px; background: var(--danger); box-shadow: 0 0 12px rgba(143,48,44,.42); }
+#normal-epilogue .epilogue-dialog-box{ position: relative; max-width: 980px; min-height: 126px; padding: 0; color: var(--paper); background: transparent; cursor: pointer; }
+#normal-epilogue .epilogue-dialog-box:focus-visible{ outline: none; }
+#normal-epilogue .epilogue-dialog-text{ max-width: 800px; min-height: 3.6em; margin: 0; font-size: clamp(1rem,1.45vw,1.22rem); line-height: 1.8; text-shadow: 0 2px 10px rgba(0,0,0,.8); }
+#normal-epilogue .continue-hint{ display: block; width: fit-content; margin: .65rem 0 0 auto; color: rgba(232,226,212,.48); font-size: .7rem; letter-spacing: .18em; animation: quiet-pulse 1.5s infinite; }
+#normal-epilogue .choices{ counter-reset: story-choice; display: grid; max-width: 860px; max-height: min(40vh,360px); margin-top: .65rem; padding-right: .35rem; overflow-y: auto; overscroll-behavior: contain; scrollbar-color: rgba(143,48,44,.7) rgba(255,255,255,.06); scrollbar-width: thin; }
+#normal-epilogue .choice-button{ counter-increment: story-choice; position: relative; display: grid; grid-template-columns: 3.3rem 1fr; grid-template-rows: auto auto; width: 100%; min-height: 68px; padding: .8rem 1rem .8rem .15rem; overflow: hidden; border: 0; border-bottom: 1px solid rgba(255,255,255,.15); color: rgba(232,226,212,.78); background: transparent; text-align: left; letter-spacing: .06em; transition: transform .22s ease,color .22s ease,background .22s ease,padding-left .22s ease; }
+#normal-epilogue .choice-button:first-child{ border-top: 1px solid rgba(255,255,255,.15); }
+#normal-epilogue .choice-button::before{ content: counter(story-choice,decimal-leading-zero); grid-row: 1 / 3; align-self: center; color: rgba(143,48,44,.9); font: .72rem/1 Georgia,serif; letter-spacing: .12em; }
+#normal-epilogue .choice-button::after{ content: "THIS CHOICE WILL SHAPE YOUR PATH"; grid-column: 2; margin-top: .15rem; color: rgba(170,166,155,.5); font: .58rem/1.3 Georgia,serif; letter-spacing: .2em; }
+#normal-epilogue .choice-button:hover,#normal-epilogue .choice-button:focus{ padding-left: .65rem; color: var(--paper); background: linear-gradient(90deg,rgba(143,48,44,.13),rgba(143,48,44,.025) 62%,transparent); outline: none; transform: translateX(8px); }
+#normal-epilogue .choice-button:hover::before,#normal-epilogue .choice-button:focus::before{ color: var(--danger-bright); text-shadow: 0 0 12px rgba(143,48,44,.5); }
+#normal-epilogue .epilogue-name{
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 3px 8px;
+  color: #eadfbe;
+  background: rgba(10, 11, 10, .84);
+  border: 1px solid rgba(222, 207, 164, .38);
+  border-radius: 2px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+#normal-epilogue .explore-objective{
+  position: absolute;
+  z-index: 12;
+  top: 78px;
+  left: 24px;
+  max-width: min(420px, calc(100% - 48px));
+  padding: 12px 18px;
+  border-left: 4px solid #8b2824;
+  color: #eee4c8;
+  background: rgba(12, 13, 12, .88);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+  pointer-events: none;
+}
+#normal-epilogue .explore-objective span{
+  display: block;
+  margin-bottom: 4px;
+  color: #ac9e79;
+  font-size: 12px;
+  letter-spacing: .16em;
+}
+#normal-epilogue .explore-objective strong{
+  display: block;
+  white-space: pre-line;
+  line-height: 1.5;
+}
+#normal-epilogue .epilogue-prompt{position:absolute;z-index:4001;bottom:78px;left:50%;transform:translateX(-50%);border:1px solid #ffffff55;background:#0a1118cc;padding:9px 20px;color:white;font-size:18px;letter-spacing:.06em;white-space:nowrap}
+#normal-epilogue .explore-objective{ top: 68px; left: 12px; padding: 9px 12px; }
+/* 数月后专用：沿用 game.css / explore.css 的章节界面，所有选择器限定在尾声内。 */
+#normal-epilogue{position:fixed;inset:0;z-index:7;background:#080a0b;color:#e8e2d4;overflow:hidden;opacity:0;transition:opacity 1.1s ease;font-family:"Microsoft YaHei","Noto Serif SC","Songti SC",Georgia,serif;line-height:1.7;--paper:#e8e2d4;--danger:#8f302c;--danger-bright:#b24a43}
+#normal-epilogue.is-visible{opacity:1}
+#normal-epilogue *{box-sizing:border-box}
+#normal-epilogue button,#normal-epilogue input{font:inherit}
+#normal-epilogue .epilogue-viewport{position:absolute;inset:0;overflow:hidden;outline:none}
+#normal-epilogue .epilogue-world{position:absolute;transform-origin:0 0;background-size:100% 100%;background-repeat:no-repeat;overflow:hidden}
+#normal-epilogue .epilogue-world::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,.34),transparent 32%,transparent 72%,rgba(0,0,0,.18)),linear-gradient(0deg,rgba(0,0,0,.74),transparent 48%);z-index:3000}
+#normal-epilogue .epilogue-player{position:absolute;left:0;top:0;width:44px;height:56px;pointer-events:none;will-change:transform}
+#normal-epilogue .player-sprite,#normal-epilogue .epilogue-entity img{position:absolute;display:block;left:50%;bottom:0;transform:translateX(-50%);width:92px;height:92px;object-fit:contain;max-width:none;filter:drop-shadow(0 7px 5px rgba(0,0,0,.42));pointer-events:none}
+#normal-epilogue .epilogue-entity{position:absolute;width:44px;height:56px;cursor:pointer;outline:none;border:0;padding:0;background:none;overflow:visible}
+#normal-epilogue .epilogue-name{bottom:90px}
+#normal-epilogue .is-object .epilogue-name{bottom:44px}
+#normal-epilogue .epilogue-dialog-stage{position:absolute;inset:0;z-index:3500;background-position:center;background-size:cover}
+#normal-epilogue .epilogue-dialog-stage::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,.34),transparent 32%,transparent 72%,rgba(0,0,0,.18)),linear-gradient(0deg,rgba(0,0,0,.74),transparent 48%)}
+#normal-epilogue .game-topbar{position:absolute;top:0;left:0;right:0;z-index:6000}
+#normal-epilogue .explore-objective,#normal-epilogue .interaction-prompt{z-index:3200}
+#normal-epilogue .epilogue-talk{z-index:5000}
+#normal-epilogue .epilogue-dialog-text{white-space:pre-line}
+#normal-epilogue.is-talking .epilogue-viewport,#normal-epilogue.is-talking .explore-objective,#normal-epilogue.is-talking .epilogue-prompt,#normal-epilogue.is-talking .epilogue-touch{visibility:hidden}
+#normal-epilogue .epilogue-screenfade{position:absolute;z-index:8000;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity 1.3s ease}
+#normal-epilogue .epilogue-screenfade.is-black{opacity:1}
+#normal-epilogue .epilogue-paused,#normal-epilogue .epilogue-settings{position:absolute;z-index:7500;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.82)}
+#normal-epilogue .epilogue-settings>div{width:min(520px,90vw);padding:28px;border:1px solid #ffffff26;background:#121312;max-height:85vh;overflow:auto}
+#normal-epilogue .epilogue-settings h2{font-size:1.6rem;margin:0 0 20px}
+#normal-epilogue .epilogue-settings label{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:16px 0}
+#normal-epilogue .epilogue-settings output{font-size:.85rem;min-width:68px}
+#normal-epilogue .epilogue-settings button,#normal-epilogue .epilogue-paused button{border:1px solid #ffffff26;background:#1e1f1d;color:#e8e2d4;padding:12px 24px}
+#normal-epilogue .epilogue-toast{position:absolute;z-index:7000;bottom:100px;left:50%;transform:translateX(-50%);background:#0c0d0ce6;border-left:3px solid #8f302c;padding:10px 20px;font-size:14px}
+#normal-epilogue .epilogue-touch{position:absolute;z-index:3200;bottom:24px;left:20px;display:none;grid-template-columns:repeat(3,42px);gap:4px}
+#normal-epilogue .epilogue-touch button{width:42px;height:42px;background:#0c121ccc;border:1px solid #fff6;color:#fff;touch-action:none;font-size:20px}
+#normal-epilogue [data-direction="up"]{grid-column:2}#normal-epilogue [data-direction="left"]{grid-column:1;grid-row:2}#normal-epilogue [data-direction="down"]{grid-column:2;grid-row:2}#normal-epilogue [data-direction="right"]{grid-column:3;grid-row:2}
+body.epilogue-active #beat,body.epilogue-active .play-controls,body.epilogue-active .player-header{visibility:hidden;pointer-events:none}
+@keyframes character-in{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
+@keyframes quiet-pulse{50%{opacity:.32}}
+
+.epilogue-edit-section{margin:36px 0;padding:28px;background:#111720;border:1px solid #465160}
+.epilogue-edit-section h2,.epilogue-edit-section h3{font-weight:normal;letter-spacing:.1em}
+.epilogue-edit-section label{display:grid;gap:8px;margin:16px 0}
+.epilogue-edit-section input,.epilogue-edit-section textarea{width:100%;padding:12px;background:#080d14;color:white;border:1px solid #394554}
+.epilogue-edit-section textarea{min-height:160px;line-height:1.7;resize:vertical}
+.epilogue-edit-section fieldset{border:1px solid #394554;margin:24px 0;padding:20px}
+.epilogue-edit-coordinates{display:flex;gap:18px}.epilogue-edit-coordinates label{flex:1}
+.epilogue-edit-section .help{color:#b9c2cd;font-size:16px}
+.edit-card.exploration-card{border-color:#879aae}
+
+@media(pointer:coarse){#normal-epilogue .epilogue-touch{display:grid}}
+@media(max-width:900px){#normal-epilogue .dialog-area{padding-right:6vw;padding-left:6vw}}
+@media(max-width:600px){#normal-epilogue .game-topbar{padding:1rem;gap:.7rem}#normal-epilogue .game-controls{gap:.7rem}#normal-epilogue .chapter-label{max-width:45vw}#normal-epilogue .dialog-area{min-height:36vh;padding:4rem 1rem max(1rem,env(safe-area-inset-bottom))}#normal-epilogue .speaker{font-size:1rem}#normal-epilogue .epilogue-dialog-text{font-size:clamp(.96rem,4vw,1.08rem);line-height:1.75}#normal-epilogue .choices{max-height:30vh}#normal-epilogue .character-layer{inset:6% 2% 18%}#normal-epilogue .character-layer img{max-width:80vw;max-height:82vh}}
+@media(prefers-reduced-motion:reduce){#normal-epilogue,#normal-epilogue .epilogue-screenfade{transition-duration:.15s}#normal-epilogue .character-layer img{animation:none}}
+
+#normal-epilogue .epilogue-dialog-stage .character-layer{z-index:3}
+
+/* 海的另一边：只影响此海岸尾声，保留原章节 UI。 */
+#normal-epilogue.is-sea .epilogue-world::after{background:linear-gradient(0deg,rgba(0,0,0,.18),transparent 28%)}
+#normal-epilogue.is-sea .epilogue-dialog-stage::before{background:linear-gradient(0deg,rgba(0,0,0,.65),transparent 46%)}
+#normal-epilogue.is-arriving .epilogue-entity{visibility:hidden}
+#normal-epilogue.is-revealing .epilogue-world{transition:transform 3.5s cubic-bezier(.22,.61,.36,1)}
+#normal-epilogue.is-revealing .game-topbar,#normal-epilogue.is-revealing .explore-objective,#normal-epilogue.is-revealing .epilogue-prompt,#normal-epilogue.is-revealing .epilogue-touch{opacity:0;pointer-events:none}
+#normal-epilogue.is-sea .game-topbar,#normal-epilogue.is-sea .explore-objective{transition:opacity 1s ease}
+#normal-epilogue.is-map-talking .epilogue-viewport{visibility:visible}
+#normal-epilogue.is-finalizing .game-topbar,#normal-epilogue.is-finalizing .explore-objective,#normal-epilogue.is-finalizing .epilogue-prompt,#normal-epilogue.is-finalizing .epilogue-touch{visibility:hidden}
+#normal-epilogue .epilogue-cinema{position:absolute;inset:0;z-index:3800;background-position:center;background-size:cover;opacity:0;transform-origin:52% 80%}
+#normal-epilogue .epilogue-cinema.is-pulling-back{animation:sea-pullback 11s cubic-bezier(.2,.7,.3,1) both}
+#normal-epilogue.is-cinematic .epilogue-world{visibility:hidden}
+#normal-epilogue .epilogue-entity{transition:transform 1.6s ease}
+#normal-epilogue.is-paused .epilogue-cinema{animation-play-state:paused}
+#normal-epilogue.is-sea .choice-button::after{content:"";display:none}
+@keyframes sea-pullback{0%{opacity:0;transform:scale(1.75)}12%{opacity:1}100%{opacity:1;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){#normal-epilogue.is-revealing .epilogue-world{transition-duration:.2s}#normal-epilogue .epilogue-cinema.is-pulling-back{animation-duration:.2s}}
+
+/* 雪山避难站：效果限定在普通结局。 */
+#normal-epilogue.is-snow .epilogue-world::after{background:linear-gradient(0deg,rgba(0,0,0,.24),transparent 35%)}
+#normal-epilogue.is-snow .choice-button::after{display:none}
+#normal-epilogue .epilogue-prompt{z-index:3200;font-size:18px;font-family:"Microsoft YaHei",sans-serif}
+#normal-epilogue .epilogue-toast{bottom:145px}
+#normal-epilogue .lamp-glow{position:absolute;pointer-events:none;width:118px;height:118px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#fff7d7 0 2%,#ffcc70cc 4%,#ffc35c55 12%,#ffb55425 38%,transparent 70%);opacity:0;transition:opacity 1.8s ease;mix-blend-mode:screen}
+#normal-epilogue .is-lit .lamp-glow{opacity:1;animation:lamp-breath 4s ease-in-out infinite alternate}
+#normal-epilogue .snowfall{position:absolute;inset:0;z-index:3100;overflow:hidden;pointer-events:none}
+#normal-epilogue .snowfall i{position:absolute;top:-8px;width:3px;height:3px;background:#f0f6ff;border-radius:50%;opacity:.55;animation:snow-drift 12s linear infinite}
+#normal-epilogue.is-talking .snowfall,#normal-epilogue.is-finalizing .snowfall{visibility:hidden}
+#normal-epilogue.is-paused .snowfall i,#normal-epilogue.is-paused .lamp-glow{animation-play-state:paused}
+@keyframes snow-drift{to{transform:translate(var(--drift),100vh);opacity:.15}}
+@keyframes lamp-breath{to{filter:brightness(.8)}}
+@media(prefers-reduced-motion:reduce){#normal-epilogue .snowfall{display:none}#normal-epilogue .lamp-glow{animation:none}}

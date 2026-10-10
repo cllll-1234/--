@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>高龙旗 | 个人介绍</title>
+  <style>
+    :root {
+      --navy: #203c69;
+      --blue: #315a8f;
+      --sky: #dceaf7;
+      --cream: #fffaf0;
+      --yellow: #f3c64d;
+      --ink: #223047;
+      --muted: #6d7890;
+      --white: #ffffff;
+      --shadow: 0 18px 50px rgba(43, 70, 104, .13);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(243, 198, 77, .16), transparent 28%),
+        radial-gradient(circle at 90% 20%, rgba(49, 90, 143, .13), transparent 32%),
+        linear-gradient(135deg, #f8fbff 0%, #fffaf1 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,.72);
+      border-bottom: 1px solid rgba(49,90,143,.10);
+    }
+
+    .nav {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: .5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: .2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      width: min(1120px, 92%);
+      margin: 54px auto 32px;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 46px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: rgba(243,198,77,.18);
+      color: #8a6810;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(44px, 7vw, 76px);
+      line-height: 1;
+      color: var(--navy);
+      margin-bottom: 18px;
+      letter-spacing: -2px;
+    }
+
+    .hero h1 span {
+      color: var(--yellow);
+      text-shadow: 0 5px 22px rgba(243,198,77,.24);
+    }
+
+    .subtitle {
+      font-size: 20px;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: .25s ease;
+    }
+
+    .btn-primary {
+      background: var(--navy);
+      color: white;
+      box-shadow: 0 10px 24px rgba(32,60,105,.22);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--navy);
+      border: 1px solid rgba(32,60,105,.14);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .portrait-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .portrait-card {
+      width: min(380px, 88vw);
+      aspect-ratio: 1 / 1.08;
+      border-radius: 36px;
+      padding: 12px;
+      background: linear-gradient(145deg, rgba(49,90,143,.18), rgba(243,198,77,.26));
+      transform: rotate(2deg);
+      box-shadow: var(--shadow);
+    }
+
+    .portrait-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 44%;
+      border-radius: 28px;
+      display: block;
+    }
+
+    .float-tag {
+      position: absolute;
+      left: 2%;
+      bottom: 6%;
+      background: white;
+      border-radius: 14px;
+      padding: 10px 14px;
+      box-shadow: var(--shadow);
+      font-weight: 800;
+      color: var(--navy);
+      transform: rotate(-5deg);
+    }
+
+    main {
+      width: min(1120px, 92%);
+      margin: 0 auto 60px;
+    }
+
+    .section {
+      margin-top: 68px;
+    }
+
+    .section-title {
+      font-size: 30px;
+      color: var(--navy);
+      margin-bottom: 24px;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 52px;
+      height: 5px;
+      margin-top: 9px;
+      border-radius: 999px;
+      background: var(--yellow);
+    }
+
+    .about-card {
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(49,90,143,.10);
+      border-radius: 26px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      line-height: 1.95;
+      font-size: 16px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .stat {
+      background: linear-gradient(180deg, #fff, #f7fbff);
+      border: 1px solid rgba(49,90,143,.10);
+      border-radius: 18px;
+      padding: 22px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(255,255,255,.9);
+      border: 1px solid rgba(49,90,143,.10);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 12px 35px rgba(43,70,104,.08);
+      transition: .25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--sky);
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      color: var(--navy);
+      margin-bottom: 10px;
+      font-size: 19px;
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 14px;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill {
+      padding: 11px 15px;
+      background: white;
+      border: 1px solid rgba(49,90,143,.13);
+      border-radius: 999px;
+      font-weight: 700;
+      color: var(--blue);
+      box-shadow: 0 8px 20px rgba(43,70,104,.06);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 20px;
+      align-items: start;
+      background: rgba(255,255,255,.86);
+      border-radius: 20px;
+      padding: 22px;
+      border: 1px solid rgba(49,90,143,.10);
+    }
+
+    .time {
+      font-weight: 800;
+      color: var(--blue);
+    }
+
+    .timeline-item h3 {
+      margin-bottom: 7px;
+      color: var(--navy);
+    }
+
+    .timeline-item p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 30px 16px 44px;
+      font-size: 13px;
+    }
+
+    .reveal {
+      animation: fadeUp .7s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 820px) {
+      .nav-links { display: none; }
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero .subtitle {
+        margin: 0 auto;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .portrait-wrap {
+        order: -1;
+      }
+      .cards,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <nav class="nav">
+      <div class="brand">LONGQI · PROFILE</div>
+      <ul class="nav-links">
+        <li><a href="#about">关于我</a></li>
+        <li><a href="#experience">经历</a></li>
+        <li><a href="#skills">技能</a></li>
+        <li><a href="#hobbies">兴趣</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero reveal">
+    <div>
+      <div class="eyebrow">👋 Hello, World!</div>
+      <h1>你好，我是<br><span>高龙旗</span></h1>
+      <p class="subtitle">
+        计算机科学与技术专业学生 · 编程爱好者 · 前端学习中。<br>
+        喜欢把代码写成作品，也喜欢用动漫和羽毛球给生活加一点“缓冲区”。
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#about">了解更多</a>
+        <a class="btn btn-secondary" href="#skills">查看技能</a>
+      </div>
+    </div>
+
+    <div class="portrait-wrap">
+      <div class="portrait-card">
+        <img src="assets/gao-avatar.jpg" alt="高龙旗头像">
+      </div>
+      <div class="float-tag">Anime × Code ✨</div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section" id="about">
+      <h2 class="section-title">关于我</h2>
+      <div class="about-card">
+        我从初中开始接触并学习 C++，在学习编程的过程中逐渐对计算机产生了浓厚兴趣。
+        高中阶段参加过 NOIP 系列信息学竞赛，并获得过省一等奖。竞赛经历让我接触到了算法、
+        数据结构与基础计算机知识，也培养了独立分析问题和解决问题的习惯。
+        <br><br>
+        进入大学以后，我选择了计算机科学与技术专业。现在除了继续学习专业课程之外，
+        也在接触 HTML、CSS 和 JavaScript 等前端开发技术，希望逐渐熟悉网页开发与实际项目制作的完整流程。
+      </div>
+
+      <div class="stats">
+        <div class="stat"><strong>C++</strong><span>从初中开始学习</span></div>
+        <div class="stat"><strong>NOIP</strong><span>省一等奖经历</span></div>
+        <div class="stat"><strong>CS</strong><span>计算机科学与技术</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <h2 class="section-title">学习经历</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time">初中</div>
+          <div>
+            <h3>开始学习 C++</h3>
+            <p>第一次系统接触编程，逐渐建立起对算法、逻辑与计算机的兴趣。</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">高中</div>
+          <div>
+            <h3>参加 NOIP 系列竞赛</h3>
+            <p>在信息学竞赛训练中学习算法与数据结构，并获得省一等奖。</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">大学</div>
+          <div>
+            <h3>计算机科学与技术专业</h3>
+            <p>继续学习专业课程，同时开始接触前端开发，尝试把知识应用到真实网页项目中。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <h2 class="section-title">技能关键词</h2>
+      <div class="skills">
+        <span class="skill">C++</span>
+        <span class="skill">算法</span>
+        <span class="skill">数据结构</span>
+        <span class="skill">HTML</span>
+        <span class="skill">CSS</span>
+        <span class="skill">JavaScript</span>
+        <span class="skill">Web Design</span>
+        <span class="skill">Problem Solving</span>
+      </div>
+    </section>
+
+    <section class="section" id="hobbies">
+      <h2 class="section-title">兴趣与目标</h2>
+      <div class="cards">
+        <article class="card">
+          <div class="icon">🎬</div>
+          <h3>动漫</h3>
+          <p>看番是我平时主要的放松方式之一，也让我接触到不同风格的作品、故事与视觉表达。</p>
+        </article>
+        <article class="card">
+          <div class="icon">🏸</div>
+          <h3>羽毛球</h3>
+          <p>长时间学习和使用电脑之后，打羽毛球可以让我活动身体，也能保持更好的学习状态。</p>
+        </article>
+        <article class="card">
+          <div class="icon">🚀</div>
+          <h3>未来目标</h3>
+          <p>继续提升编程能力，多接触新的技术与项目，积累更多实际开发经验。</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Designed for Web Design Coursework · 高龙旗个人介绍页
+  </footer>
+</body>
+</html>
+

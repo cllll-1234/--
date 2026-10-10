@@ -1,0 +1,2487 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: #000;
+
+    font-family: "STKaiti", "KaiTi", serif;
+
+    color: #eee;
+
+}
+
+
+body {
+
+    user-select: none;
+
+}
+
+
+/* =================================================
+   场景
+================================================= */
+
+.scene {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    overflow: hidden;
+
+    background: #050505;
+
+}
+
+
+.scene.active {
+
+    display: flex;
+
+}
+
+
+/* =================================================
+   第一階段
+================================================= */
+
+#sortScene {
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #242424 0%,
+            #0b0b0b 48%,
+            #000 100%
+        );
+
+}
+
+
+.backgroundDark {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,0.35),
+            rgba(0,0,0,0.8)
+        );
+
+}
+
+
+.sceneContent {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 94%;
+
+    max-width: 1450px;
+
+    text-align: center;
+
+}
+
+
+.gameTitle {
+
+    font-size: 54px;
+
+    font-weight: bold;
+
+    letter-spacing: 12px;
+
+    margin-bottom: 12px;
+
+    color: #e6e6e6;
+
+    text-shadow:
+        0 0 20px
+        rgba(255,255,255,0.12);
+
+}
+
+
+.gameSubtitle {
+
+    font-size: 20px;
+
+    letter-spacing: 5px;
+
+    color: #888;
+
+    margin-bottom: 48px;
+
+}
+
+
+.errorText {
+
+    height: 28px;
+
+    margin-bottom: 15px;
+
+    color: #c7c7c7;
+
+    font-size: 17px;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* =================================================
+   第一階段卡牌
+================================================= */
+
+.normalCards {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+    min-height: 355px;
+
+}
+
+
+.normalSlot {
+
+    position: relative;
+
+    width: 185px;
+
+    height: 330px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+}
+
+
+.romanNumber {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-family: "STKaiti", "KaiTi", serif;
+
+    font-size: 38px;
+
+    font-weight: bold;
+
+    color: #d4d4d4;
+
+    letter-spacing: 3px;
+
+    z-index: 10;
+
+}
+
+
+.normalCard {
+
+    position: absolute;
+
+    bottom: 0;
+
+    width: 180px;
+
+    height: 275px;
+
+    border: 1px solid #555;
+
+    background:
+        linear-gradient(
+            135deg,
+            #292929,
+            #111
+        );
+
+    box-shadow:
+        0 12px 35px
+        rgba(0,0,0,0.6);
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        border 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+.normalCard:hover {
+
+    transform:
+        translateY(-8px);
+
+    border-color: #aaa;
+
+    box-shadow:
+        0 18px 45px
+        rgba(0,0,0,0.8);
+
+}
+
+
+.normalCard.selected {
+
+    border-color: #ddd;
+
+    box-shadow:
+        0 0 25px
+        rgba(255,255,255,0.22);
+
+    transform:
+        translateY(-12px);
+
+}
+
+
+.normalCard img {
+
+    width: 100%;
+
+    height: 215px;
+
+    object-fit: cover;
+
+    display: block;
+
+    filter:
+        grayscale(25%)
+        contrast(1.05)
+        brightness(0.72);
+
+}
+
+
+.cardTitle {
+
+    height: 60px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 5px 10px;
+
+    font-size: 17px;
+
+    letter-spacing: 2px;
+
+    color: #ddd;
+
+    background:
+        rgba(0,0,0,0.72);
+
+}
+
+
+.confirmButton {
+
+    min-width: 230px;
+
+    min-height: 62px;
+
+    margin-top: 50px;
+
+    padding: 0 35px;
+
+    border: 1px solid #666;
+
+    background:
+        linear-gradient(
+            #292929,
+            #111
+        );
+
+    color: #eee;
+
+    font-size: 19px;
+
+    letter-spacing: 4px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s,
+        transform 0.25s,
+        border 0.25s;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.5);
+
+}
+
+
+.confirmButton:hover {
+
+    border-color: #aaa;
+
+    background:
+        linear-gradient(
+            #3a3a3a,
+            #181818
+        );
+
+    transform:
+        translateY(-3px);
+
+}
+
+
+.wrongShake {
+
+    animation:
+        wrongShake
+        0.45s
+        ease;
+
+}
+
+
+@keyframes wrongShake {
+
+    0% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-12px);
+    }
+
+    40% {
+        transform: translateX(12px);
+    }
+
+    60% {
+        transform: translateX(-8px);
+    }
+
+    80% {
+        transform: translateX(8px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+
+}
+
+
+/* =================================================
+   病症過渡
+================================================= */
+
+.transitionScene {
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #000;
+
+}
+
+
+.transitionDark {
+
+    position: absolute;
+
+    inset: -10%;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            #1b1b1b 0%,
+            #090909 42%,
+            #000 80%
+        );
+
+    opacity: 0;
+
+    animation:
+        transitionBackground
+        15s
+        ease
+        forwards;
+
+}
+
+
+.memoryVignette {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 30%,
+            rgba(0,0,0,0.3) 65%,
+            rgba(0,0,0,0.9) 100%
+        );
+
+    opacity: 0;
+
+    animation:
+        vignetteAnimation
+        15s
+        ease
+        forwards;
+
+}
+
+
+.memoryNoise {
+
+    position: absolute;
+
+    inset: -5%;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,0.025) 0px,
+            rgba(255,255,255,0.025) 1px,
+            transparent 1px,
+            transparent 5px
+        );
+
+    mix-blend-mode: screen;
+
+    animation:
+        memoryNoiseAnimation
+        15s
+        ease
+        forwards;
+
+}
+
+
+.transitionContent {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    pointer-events: none;
+
+}
+
+
+.mainText,
+.secondText,
+.warningText,
+.painText,
+.memoryFragmentText,
+.memoryFragmentText2 {
+
+    position: absolute;
+
+    width: 100%;
+
+    text-align: center;
+
+}
+
+
+.mainText {
+
+    font-size: 32px;
+
+    letter-spacing: 5px;
+
+    color: #eee;
+
+    opacity: 0;
+
+    animation:
+        transitionMain
+        15s
+        ease
+        forwards;
+
+}
+
+
+.secondText {
+
+    font-size: 28px;
+
+    letter-spacing: 5px;
+
+    color: #d0d0d0;
+
+    opacity: 0;
+
+    animation:
+        transitionSecond
+        15s
+        ease
+        forwards;
+
+}
+
+
+.warningText {
+
+    font-size: 30px;
+
+    letter-spacing: 5px;
+
+    color: #cfcfcf;
+
+    opacity: 0;
+
+    animation:
+        transitionWarning
+        15s
+        ease
+        forwards;
+
+}
+
+
+.painText {
+
+    font-size: 68px;
+
+    font-weight: bold;
+
+    letter-spacing: 18px;
+
+    color: #eee;
+
+    opacity: 0;
+
+    animation:
+        painAnimation
+        15s
+        ease
+        forwards;
+
+}
+
+
+.memoryFragmentText {
+
+    font-size: 38px;
+
+    letter-spacing: 8px;
+
+    color: #aaa;
+
+    opacity: 0;
+
+    animation:
+        fragmentOne
+        15s
+        ease
+        forwards;
+
+}
+
+
+.memoryFragmentText2 {
+
+    font-size: 44px;
+
+    letter-spacing: 10px;
+
+    color: #ddd;
+
+    opacity: 0;
+
+    animation:
+        fragmentTwo
+        15s
+        ease
+        forwards;
+
+}
+
+
+.memoryFlash {
+
+    position: absolute;
+
+    z-index: 3;
+
+    font-family: "STKaiti", "KaiTi", serif;
+
+    font-weight: bold;
+
+    color:
+        rgba(255,255,255,0.75);
+
+    font-size: 45px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    filter: blur(1px);
+
+}
+
+
+.flash1 {
+
+    top: 25%;
+
+    left: 18%;
+
+    animation:
+        flashOne
+        15s
+        ease
+        forwards;
+
+}
+
+
+.flash2 {
+
+    top: 38%;
+
+    right: 15%;
+
+    animation:
+        flashTwo
+        15s
+        ease
+        forwards;
+
+}
+
+
+.flash3 {
+
+    bottom: 27%;
+
+    left: 23%;
+
+    animation:
+        flashThree
+        15s
+        ease
+        forwards;
+
+}
+
+
+.flash4 {
+
+    bottom: 22%;
+
+    right: 20%;
+
+    animation:
+        flashFour
+        15s
+        ease
+        forwards;
+
+}
+
+
+.memoryBlocked {
+
+    position: absolute;
+
+    width: 100%;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%)
+        scale(0.82);
+
+    text-align: center;
+
+    font-size:
+        clamp(
+            90px,
+            12vw,
+            190px
+        );
+
+    font-weight: 900;
+
+    letter-spacing: 28px;
+
+    color: #eee;
+
+    text-shadow:
+        0 0 15px
+        rgba(255,255,255,0.15),
+
+        0 0 45px
+        rgba(255,255,255,0.08);
+
+    opacity: 0;
+
+    animation:
+        memoryBlockedAnimation
+        15s
+        ease
+        forwards;
+
+}
+
+
+@keyframes transitionBackground {
+
+    0% {
+        opacity: 0;
+    }
+
+    8% {
+        opacity: 1;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    55% {
+        opacity: 1;
+    }
+
+    75% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 1;
+    }
+
+}
+
+
+@keyframes vignetteAnimation {
+
+    0% {
+        opacity: 0;
+    }
+
+    35% {
+        opacity: 0.2;
+    }
+
+    60% {
+        opacity: 0.35;
+    }
+
+    75% {
+        opacity: 0.7;
+    }
+
+    90% {
+        opacity: 0.35;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+@keyframes memoryNoiseAnimation {
+
+    0% {
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 0;
+    }
+
+    43% {
+        opacity: 0.05;
+    }
+
+    52% {
+        opacity: 0.1;
+    }
+
+    62% {
+        opacity: 0.18;
+    }
+
+    72% {
+        opacity: 0.35;
+    }
+
+    80% {
+        opacity: 0.18;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+@keyframes transitionMain {
+
+    0% {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    8% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    27% {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+@keyframes transitionSecond {
+
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    40% {
+        opacity: 1;
+    }
+
+    46% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+@keyframes transitionWarning {
+
+    0% {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 0;
+    }
+
+    45% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.55;
+    }
+
+    55% {
+        opacity: 1;
+    }
+
+    61% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+@keyframes painAnimation {
+
+    0% {
+        opacity: 0;
+    }
+
+    53% {
+        opacity: 0;
+    }
+
+    57% {
+        opacity: 0.65;
+        transform: scale(1);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale(1.13);
+    }
+
+    63% {
+        opacity: 0.45;
+        transform: scale(0.93);
+    }
+
+    66% {
+        opacity: 0;
+        transform: scale(1.18);
+        filter: blur(5px);
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+@keyframes fragmentOne {
+
+    0% {
+        opacity: 0;
+    }
+
+    48% {
+        opacity: 0;
+    }
+
+    52% {
+        opacity: 0.6;
+        transform: translateX(-20px);
+    }
+
+    56% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+@keyframes fragmentTwo {
+
+    0% {
+        opacity: 0;
+    }
+
+    55% {
+        opacity: 0;
+    }
+
+    59% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+
+    63% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+@keyframes flashOne {
+
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    42% {
+        opacity: 0;
+    }
+
+    45% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+
+    47% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+@keyframes flashTwo {
+
+    0% {
+        opacity: 0;
+    }
+
+    47% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+
+    53% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+@keyframes flashThree {
+
+    0% {
+        opacity: 0;
+    }
+
+    54% {
+        opacity: 0;
+    }
+
+    57% {
+        opacity: 0.75;
+    }
+
+    60% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+@keyframes flashFour {
+
+    0% {
+        opacity: 0;
+    }
+
+    58% {
+        opacity: 0;
+    }
+
+    61% {
+        opacity: 0.7;
+    }
+
+    64% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+@keyframes memoryBlockedAnimation {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateY(-50%)
+            scale(0.82);
+
+    }
+
+    63% {
+
+        opacity: 0;
+
+        transform:
+            translateY(-50%)
+            scale(0.82);
+
+    }
+
+    68% {
+
+        opacity: 1;
+
+        transform:
+            translateY(-50%)
+            scale(1);
+
+    }
+
+    74% {
+
+        opacity: 1;
+
+        transform:
+            translateY(-50%)
+            scale(1.02);
+
+    }
+
+    80% {
+
+        opacity: 1;
+
+        transform:
+            translateY(-50%)
+            scale(1);
+
+    }
+
+    88% {
+
+        opacity: 1;
+
+    }
+
+    94% {
+
+        opacity: 0;
+
+        transform:
+            translateY(-50%)
+            scale(1.08);
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* =================================================
+   魔法換牌階段
+================================================= */
+
+.magicScene {
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #202020,
+            #050505 75%
+        );
+
+}
+
+
+.magicBackground {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(255,255,255,0.05),
+            transparent 60%
+        );
+
+}
+
+
+.magicContent {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    text-align: center;
+
+}
+
+
+.magicTitle {
+
+    font-size: 36px;
+
+    letter-spacing: 10px;
+
+    margin-bottom: 12px;
+
+    color: #ddd;
+
+}
+
+
+.magicProgress {
+
+    font-size: 18px;
+
+    letter-spacing: 5px;
+
+    color: #888;
+
+    height: 30px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.magicGrid {
+
+    width: 1180px;
+
+    max-width: 90vw;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, 1fr);
+
+    gap: 20px;
+
+    align-items: start;
+
+}
+
+
+.magicSlot {
+
+    position: relative;
+
+    height: 315px;
+
+    padding-top: 45px;
+
+}
+
+
+.magicRoman {
+
+    position: absolute;
+
+    top: 0;
+
+    width: 100%;
+
+    font-family: "STKaiti", "KaiTi", serif;
+
+    font-size: 38px;
+
+    font-weight: bold;
+
+    color: #ddd;
+
+    text-align: center;
+
+}
+
+
+.magicCard {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 0;
+
+    width: 170px;
+
+    height: 260px;
+
+    transform:
+        translateX(-50%);
+
+    border: 1px solid #555;
+
+    background:
+        linear-gradient(
+            135deg,
+            #292929,
+            #0d0d0d
+        );
+
+    box-shadow:
+        0 15px 35px
+        rgba(0,0,0,0.7);
+
+    overflow: hidden;
+
+}
+
+
+.magicCard::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 15px;
+
+    border: 1px solid #444;
+
+    background:
+        repeating-linear-gradient(
+            45deg,
+            transparent 0px,
+            transparent 10px,
+            rgba(255,255,255,0.025) 10px,
+            rgba(255,255,255,0.025) 11px
+        );
+
+}
+
+
+.magicCard::after {
+
+    content: "記憶";
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-20deg);
+
+    font-size: 25px;
+
+    letter-spacing: 7px;
+
+    color: #666;
+
+}
+
+
+/* =================================================
+   背面重新整理
+================================================= */
+
+.blindScene {
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #171717,
+            #030303 80%
+        );
+
+}
+
+
+.blindBackground {
+
+    position: absolute;
+
+    inset: 0;
+
+}
+
+
+.blindContent {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    text-align: center;
+
+}
+
+
+.blindTitle {
+
+    font-size: 38px;
+
+    letter-spacing: 10px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.blindSubtitle {
+
+    color: #777;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.blindCards {
+
+    width: 1180px;
+
+    max-width: 90vw;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.blindSlot {
+
+    position: relative;
+
+    height: 315px;
+
+    padding-top: 45px;
+
+}
+
+
+.blindRoman {
+
+    position: absolute;
+
+    top: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-family: "STKaiti", "KaiTi", serif;
+
+    font-size: 38px;
+
+    font-weight: bold;
+
+    color: #ddd;
+
+}
+
+
+.blindCard {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 50%;
+
+    width: 170px;
+
+    height: 260px;
+
+    transform:
+        translateX(-50%);
+
+    border: 1px solid #555;
+
+    background:
+        linear-gradient(
+            135deg,
+            #282828,
+            #0c0c0c
+        );
+
+    cursor: pointer;
+
+    box-shadow:
+        0 15px 35px
+        rgba(0,0,0,0.7);
+
+    overflow: hidden;
+
+    transition:
+        border 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+/* 卡牌內部紋理 */
+
+.blindCard::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 15px;
+
+    border: 1px solid #444;
+
+    background:
+        repeating-linear-gradient(
+            45deg,
+            transparent 0px,
+            transparent 12px,
+            rgba(255,255,255,0.025) 12px,
+            rgba(255,255,255,0.025) 13px
+        );
+
+}
+
+
+/* 中間的記憶文字 */
+
+.blindCard::after {
+
+    content: "記憶";
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-20deg);
+
+    color: #555;
+
+    font-size: 24px;
+
+    letter-spacing: 6px;
+
+}
+
+
+/* 點擊第一张 */
+
+.blindCard.blindSelected {
+
+    border-color: #ddd;
+
+    box-shadow:
+        0 0 30px
+        rgba(255,255,255,0.25);
+
+    transform:
+        translateX(-50%)
+        translateY(-12px);
+
+}
+
+
+/* 正在交換 */
+
+.blindCard.blindMoving {
+
+    z-index: 20;
+
+    transition:
+        transform
+        0.85s
+        cubic-bezier(
+            0.22,
+            0.61,
+            0.36,
+            1
+        );
+
+}
+
+
+/* 锁定期間禁止點擊 */
+
+.blindCards.locked {
+
+    pointer-events: none;
+
+}
+
+
+.blindConfirm {
+
+    margin-top: 48px;
+
+}
+
+
+.chanceText {
+
+    margin-top: 20px;
+
+    color: #888;
+
+    letter-spacing: 3px;
+
+}
+
+
+.blindError {
+
+    height: 25px;
+
+    margin-top: 12px;
+
+    color: #aaa;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* =================================================
+   記憶播放
+================================================= */
+
+.memoryScene {
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #050505;
+
+    cursor: pointer;
+
+}
+
+
+.memorySceneBackground {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            #262626,
+            #050505 75%
+        );
+
+}
+
+
+.memorySceneContent {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 900px;
+
+    max-width: 90vw;
+
+    text-align: center;
+
+}
+
+
+.memoryImageBox {
+
+    position: relative;
+
+    width: 650px;
+
+    height: 360px;
+
+    margin:
+        0 auto 35px;
+
+    border: 1px solid #444;
+
+    background: #111;
+
+    box-shadow:
+        0 15px 50px
+        rgba(0,0,0,0.8);
+
+}
+
+
+.memoryImageBox img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    filter:
+        grayscale(20%)
+        contrast(1.08)
+        brightness(0.78);
+
+}
+
+
+.memorySpeaker {
+
+    font-size: 23px;
+
+    letter-spacing: 4px;
+
+    color: #aaa;
+
+    margin-bottom: 18px;
+
+}
+
+
+.memoryText {
+
+    font-size: 27px;
+
+    line-height: 1.8;
+
+    letter-spacing: 3px;
+
+    color: #eee;
+
+    min-height: 100px;
+
+}
+
+
+.memoryHint {
+
+    margin-top: 30px;
+
+    color: #666;
+
+    letter-spacing: 3px;
+
+}
+
+
+/* =================================================
+   結局
+================================================= */
+
+.endingScene {
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #000;
+
+}
+
+
+.endingBackground {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #1c1c1c,
+            #000 75%
+        );
+
+}
+
+
+.endingContent {
+
+    position: relative;
+
+    z-index: 2;
+
+    text-align: center;
+
+    width: 850px;
+
+    max-width: 90vw;
+
+}
+
+
+.endingTitle {
+
+    font-size: 58px;
+
+    letter-spacing: 12px;
+
+    margin-bottom: 40px;
+
+    color: #eee;
+
+}
+
+
+.endingText {
+
+    font-size: 27px;
+
+    line-height: 2;
+
+    letter-spacing: 4px;
+
+    color: #bbb;
+
+    min-height: 100px;
+
+}
+
+
+.endingButton {
+
+    min-width: 230px;
+
+    min-height: 60px;
+
+    margin-top: 55px;
+
+    border: 1px solid #666;
+
+    background:
+        linear-gradient(
+            #292929,
+            #111
+        );
+
+    color: #eee;
+
+    font-size: 18px;
+
+    letter-spacing: 4px;
+
+    cursor: pointer;
+
+}
+
+
+.endingButton:hover {
+
+    background:
+        linear-gradient(
+            #3a3a3a,
+            #181818
+        );
+
+}
+
+
+.memoryImageBox img[hidden] {
+
+    display: none;
+
+}
+
+
+.memoryImageFallback {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: grid;
+
+    place-items: center;
+
+    padding: 35px;
+
+    color: #928b80;
+
+    background:
+        radial-gradient(circle at center, rgba(88, 79, 66, 0.2), transparent 58%),
+        #111;
+
+    font-size: 24px;
+
+    letter-spacing: 5px;
+
+}
+
+
+.memoryImageFallback[hidden] {
+
+    display: none;
+
+}
+
+/* =================================================
+   场景美術升级：六幕記憶影像
+================================================= */
+
+:root {
+    --memory-ink: #f5ead4;
+    --memory-gold: #c99b5a;
+    --memory-line: rgba(222, 190, 137, 0.42);
+    --memory-panel: rgba(13, 16, 20, 0.78);
+}
+
+.scene {
+    isolation: isolate;
+    transition: opacity 0.45s ease, filter 0.45s ease;
+}
+
+.scene:not(.active) {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#sortScene::before,
+.magicScene::before,
+.blindScene::before,
+.endingScene::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background: center / cover no-repeat;
+    filter: saturate(0.72) contrast(1.08) brightness(0.42);
+    transform: scale(1.04);
+}
+
+#sortScene::before { background-image: url("assets/scene-01.webp"); }
+.magicScene::before { background-image: url("assets/scene-02.webp"); }
+.blindScene::before { background-image: url("assets/scene-03.webp"); }
+.endingScene::before { background-image: url("assets/scene-06.webp"); }
+
+#sortScene::after,
+.magicScene::after,
+.blindScene::after,
+.endingScene::after,
+.memorySceneBackground::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        linear-gradient(180deg, rgba(7, 9, 12, 0.18), rgba(7, 9, 12, 0.82)),
+        radial-gradient(circle at 50% 35%, transparent 0 28%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.sceneContent,
+.magicContent,
+.blindContent,
+.endingContent {
+    padding: 34px 30px 28px;
+    border: 1px solid rgba(220, 180, 112, 0.24);
+    background: linear-gradient(180deg, rgba(11, 14, 18, 0.58), rgba(5, 7, 9, 0.78));
+    box-shadow: 0 22px 80px rgba(0, 0, 0, 0.58), inset 0 1px rgba(255, 240, 203, 0.08);
+    backdrop-filter: blur(7px);
+}
+
+.gameTitle,
+.magicTitle,
+.blindTitle,
+.endingTitle {
+    color: var(--memory-ink);
+    text-shadow: 0 3px 24px rgba(0, 0, 0, 0.85);
+}
+
+.gameSubtitle,
+.magicProgress,
+.blindSubtitle {
+    color: #d2b98e;
+}
+
+.normalCard {
+    border-color: var(--memory-line);
+    background: rgba(12, 15, 18, 0.92);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 220, 159, 0.05);
+}
+
+.normalCard img {
+    height: 215px;
+    filter: saturate(0.82) contrast(1.08) brightness(0.78);
+}
+
+.cardTitle {
+    color: var(--memory-ink);
+    background: linear-gradient(180deg, rgba(13, 15, 17, 0.62), rgba(7, 9, 11, 0.94));
+}
+
+.romanNumber,
+.magicRoman,
+.blindRoman {
+    color: #efd29d;
+    text-shadow: 0 2px 12px #000;
+}
+
+.confirmButton,
+.endingButton {
+    border-color: rgba(224, 184, 111, 0.62);
+    color: var(--memory-ink);
+    background: linear-gradient(135deg, rgba(116, 77, 35, 0.78), rgba(24, 22, 18, 0.92));
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.38), inset 0 1px rgba(255, 225, 170, 0.18);
+}
+
+.confirmButton:hover,
+.endingButton:hover {
+    border-color: #f1d19c;
+    background: linear-gradient(135deg, rgba(151, 100, 45, 0.9), rgba(37, 29, 20, 0.94));
+}
+
+.transitionScene {
+    background: #080a0d url("assets/scene-02.webp") center / cover no-repeat;
+}
+
+.transitionDark {
+    background: linear-gradient(180deg, rgba(5, 7, 10, 0.64), rgba(5, 5, 5, 0.88));
+}
+
+.memoryScene {
+    background: #08090b;
+}
+
+.memorySceneBackground {
+    background: center / cover no-repeat url("assets/scene-01.webp");
+    filter: saturate(0.72) contrast(1.1) brightness(0.45);
+    transform: scale(1.05);
+    transition: background-image 0.55s ease;
+}
+
+.memorySceneContent {
+    width: min(980px, 92vw);
+    max-width: 980px;
+    padding: 26px 28px 22px;
+    border: 1px solid rgba(224, 188, 128, 0.35);
+    background: linear-gradient(180deg, rgba(13, 15, 18, 0.28), rgba(8, 10, 12, 0.82));
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(5px);
+}
+
+.memoryImageBox {
+    width: min(760px, 100%);
+    height: min(60vh, 520px);
+    margin: 0 auto 22px;
+    border: 1px solid rgba(230, 194, 133, 0.58);
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.78), 0 0 0 8px rgba(12, 12, 12, 0.26);
+}
+
+.memoryImageBox img {
+    filter: saturate(0.86) contrast(1.1) brightness(0.84);
+}
+
+.memorySpeaker {
+    color: #e5bd7d;
+    font-weight: 700;
+    text-shadow: 0 2px 8px #000;
+}
+
+.memoryText {
+    min-height: 72px;
+    color: #fff4df;
+    text-shadow: 0 2px 10px #000;
+}
+
+.memoryHint {
+    margin-top: 18px;
+    color: #d1b98e;
+}
+
+@media (max-width: 900px) {
+    .sceneContent,
+    .magicContent,
+    .blindContent,
+    .endingContent {
+        width: 96%;
+        padding: 22px 12px 18px;
+    }
+
+    .normalCards,
+    .magicGrid,
+    .blindCards {
+        gap: 8px;
+    }
+
+    .normalSlot,
+    .magicSlot,
+    .blindSlot {
+        transform: scale(0.82);
+        transform-origin: top center;
+        margin-bottom: -50px;
+    }
+
+    .memoryImageBox {
+        height: min(52vh, 420px);
+    }
+}
+
+/* =================================================
+   記憶重構介面：黑白紅電影質感
+================================================= */
+
+:root {
+    --memory-ink: #f3f1eb;
+    --memory-muted: rgba(224, 224, 220, 0.64);
+    --memory-red: #8f2724;
+    --memory-line: rgba(235, 235, 230, 0.2);
+    --memory-panel: rgba(5, 7, 9, 0.84);
+}
+
+#sortScene,
+.magicScene,
+.blindScene,
+.endingScene {
+    background: #030405;
+}
+
+#sortScene::before,
+.magicScene::before,
+.blindScene::before,
+.endingScene::before {
+    filter: grayscale(0.48) saturate(0.42) contrast(1.16) brightness(0.3);
+}
+
+#sortScene::after,
+.magicScene::after,
+.blindScene::after,
+.endingScene::after {
+    background:
+        linear-gradient(180deg, rgba(2, 3, 4, 0.25), rgba(2, 3, 4, 0.9)),
+        radial-gradient(circle at 50% 34%, transparent 0 24%, rgba(0, 0, 0, 0.72) 100%);
+}
+
+.sceneContent,
+.magicContent,
+.blindContent,
+.endingContent {
+    width: min(94vw, 1540px);
+    max-width: 1540px;
+    padding: 38px 34px 32px;
+    border: 1px solid rgba(245, 245, 240, 0.18);
+    background:
+        linear-gradient(90deg, var(--memory-red), transparent 11%) top left / 38% 1px no-repeat,
+        linear-gradient(270deg, var(--memory-red), transparent 11%) top right / 38% 1px no-repeat,
+        linear-gradient(180deg, rgba(13, 16, 19, 0.88), rgba(3, 5, 7, 0.94));
+    box-shadow:
+        0 30px 100px rgba(0, 0, 0, 0.76),
+        inset 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 0 60px rgba(255, 255, 255, 0.018);
+    backdrop-filter: blur(10px);
+}
+
+.gameTitle,
+.magicTitle,
+.blindTitle,
+.endingTitle {
+    color: var(--memory-ink);
+    font-weight: 600;
+    text-shadow: 0 4px 28px rgba(0, 0, 0, 0.92);
+}
+
+.gameTitle,
+.blindTitle {
+    letter-spacing: 0.28em;
+    text-indent: 0.28em;
+}
+
+.gameSubtitle,
+.magicProgress,
+.blindSubtitle,
+.chanceText,
+.blindError,
+.errorText {
+    color: var(--memory-muted);
+}
+
+.gameSubtitle::after,
+.blindSubtitle::after {
+    content: "";
+    display: block;
+    width: 72px;
+    height: 1px;
+    margin: 20px auto 0;
+    background: linear-gradient(90deg, transparent, var(--memory-red), transparent);
+}
+
+.normalCards {
+    min-height: 390px;
+    gap: 18px;
+}
+
+.normalSlot {
+    height: 380px;
+}
+
+.magicSlot,
+.blindSlot {
+    height: 365px;
+    padding-top: 88px;
+}
+
+.romanNumber,
+.magicRoman,
+.blindRoman {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 76px;
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: 0;
+    color: var(--memory-ink);
+    text-shadow: 0 4px 22px rgba(0, 0, 0, 0.92);
+}
+
+.normalCard,
+.magicCard,
+.blindCard {
+    border: 1px solid var(--memory-line);
+    background: linear-gradient(145deg, rgba(24, 27, 30, 0.96), rgba(5, 7, 9, 0.98));
+    box-shadow:
+        0 20px 46px rgba(0, 0, 0, 0.74),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.025);
+}
+
+.normalCard::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.07), transparent 24%),
+        linear-gradient(0deg, rgba(143, 39, 36, 0.1), transparent 34%);
+}
+
+.normalCard:hover,
+.normalCard.selected,
+.blindCard:hover,
+.blindCard.blindSelected {
+    border-color: rgba(245, 245, 240, 0.72);
+    box-shadow:
+        0 24px 54px rgba(0, 0, 0, 0.82),
+        0 0 0 1px rgba(143, 39, 36, 0.5),
+        0 0 24px rgba(143, 39, 36, 0.2);
+}
+
+.normalCard img {
+    filter: grayscale(0.18) saturate(0.72) contrast(1.12) brightness(0.74);
+}
+
+.cardTitle {
+    color: var(--memory-ink);
+    background: linear-gradient(180deg, rgba(12, 14, 16, 0.74), rgba(3, 4, 5, 0.98));
+    border-top: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.confirmButton,
+.endingButton {
+    position: relative;
+    min-width: 250px;
+    border: 1px solid rgba(245, 245, 240, 0.46);
+    color: var(--memory-ink);
+    background:
+        linear-gradient(90deg, var(--memory-red), var(--memory-red)) left center / 3px 58% no-repeat,
+        linear-gradient(180deg, rgba(28, 31, 34, 0.98), rgba(7, 9, 11, 0.98));
+    box-shadow:
+        0 16px 42px rgba(0, 0, 0, 0.62),
+        inset 0 1px rgba(255, 255, 255, 0.07);
+    font-family: "STKaiti", "KaiTi", serif;
+    font-weight: 600;
+    text-shadow: 0 2px 8px #000;
+}
+
+.confirmButton:hover,
+.endingButton:hover {
+    border-color: rgba(255, 255, 255, 0.9);
+    color: #fff;
+    background:
+        linear-gradient(90deg, #b63732, #b63732) left center / 4px 72% no-repeat,
+        linear-gradient(180deg, rgba(39, 43, 47, 0.99), rgba(9, 11, 13, 0.99));
+    box-shadow:
+        0 19px 50px rgba(0, 0, 0, 0.72),
+        0 0 24px rgba(143, 39, 36, 0.18),
+        inset 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.blindConfirm {
+    margin-top: 42px;
+}
+
+@media (max-width: 900px) {
+    .romanNumber,
+    .magicRoman,
+    .blindRoman {
+        font-size: 66px;
+    }
+}
+
+@media (max-height: 800px) and (min-width: 901px) {
+    .sceneContent,
+    .magicContent,
+    .blindContent,
+    .endingContent {
+        padding-top: 20px;
+        padding-bottom: 18px;
+    }
+
+    .gameTitle,
+    .blindTitle {
+        font-size: 40px;
+        margin-bottom: 6px;
+    }
+
+    .gameSubtitle,
+    .blindSubtitle {
+        margin-bottom: 18px;
+    }
+
+    .gameSubtitle::after,
+    .blindSubtitle::after {
+        margin-top: 10px;
+    }
+
+    .normalCards {
+        min-height: 332px;
+    }
+
+    .normalSlot {
+        height: 326px;
+    }
+
+    .magicSlot,
+    .blindSlot {
+        height: 320px;
+        padding-top: 66px;
+    }
+
+    .romanNumber,
+    .magicRoman,
+    .blindRoman {
+        font-size: 62px;
+    }
+
+    .normalCard,
+    .magicCard,
+    .blindCard {
+        transform-origin: bottom center;
+    }
+
+    .normalCard {
+        height: 245px;
+    }
+
+    .normalCard img {
+        height: 187px;
+    }
+
+    .magicCard,
+    .blindCard {
+        height: 240px;
+    }
+
+    .confirmButton,
+    .endingButton {
+        min-height: 54px;
+        margin-top: 20px;
+    }
+}

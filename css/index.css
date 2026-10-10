@@ -1,0 +1,267 @@
+.home-page {
+  position: relative;
+  min-height: 100vh;
+  isolation: isolate;
+  background: #090b0a;
+}
+
+/* 保持 home.png 原图亮度，不叠加压暗滤镜。 */
+.home-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: url("../images/bg/home.png");
+  background-position: center;
+  background-size: cover;
+  transform-origin: center;
+  animation: home-cinematic-in .9s cubic-bezier(.2,.65,.3,1) both;
+}
+
+/* The original home.png remains visible until the video renders. */
+.home-background-video {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.home-title-logo {
+  position: fixed;
+  z-index: 1;
+  top: 48vh;
+  left: 50%;
+  width: 62vw;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, .5));
+  transition: opacity .38s ease, transform .55s cubic-bezier(.2, .7, .25, 1), visibility 0s .55s;
+}
+
+.home-entered .home-title-logo {
+  visibility: hidden;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.94);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-background-video { display: none; }
+}
+
+.home-page::after {
+  content: none;
+}
+
+.home-gate .home-content,
+.home-gate .skip-link {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.home-entry {
+  position: fixed;
+  z-index: 2;
+  top: 83.5vh;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: clamp(.7rem, 2vw, 1.4rem);
+  padding: .35rem 0;
+  border: 0;
+  color: #fff;
+  background: transparent;
+  font-family: "STKaiti", "KaiTi", "Microsoft YaHei", serif;
+  font-size: .9rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px #000, 0 0 9px #000;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  animation: home-entry-pulse 2.2s ease-in-out infinite;
+}
+
+.home-entry::before,
+.home-entry::after {
+  content: "";
+  display: block;
+  width: clamp(58px, 8vw, 100px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .9));
+  box-shadow: 0 0 7px rgba(255, 255, 255, .5);
+}
+
+.home-entry::after { transform: rotate(180deg); }
+.home-entry:focus, .home-entry:focus-visible { outline: none; box-shadow: none; }
+.home-entered .home-entry { display: none; }
+.home-menu:focus { outline: none; }
+.home-entered .home-menu {
+  transform-origin: center;
+  animation: home-menu-unfold .95s cubic-bezier(.18,.7,.25,1) both;
+}
+
+@media (max-width: 480px) {
+  .home-title-logo { top: 40vh; width: 82vw; }
+  .home-entry { gap: .65rem; font-size: .82rem; }
+  .home-entry::before, .home-entry::after { width: 42px; }
+}
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(1180px, calc(100% - 2rem));
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+.home-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: min(330px, 88vw);
+  margin: 0;
+  animation: menu-arrive .75s .28s ease both;
+}
+
+.home-menu .button {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 62px;
+  padding: .3rem 1.4rem;
+  border: 0;
+  color: #ffffff;
+  background: transparent;
+  font-family: "STKaiti", "KaiTi", "Microsoft YaHei", serif;
+  text-align: center;
+  text-shadow: 0 2px 2px #000, 0 0 7px #000;
+  transition: color .2s ease, transform .2s ease, text-shadow .2s ease;
+}
+
+.home-menu .menu-cn::before,
+.home-menu .menu-cn::after,
+#auth-button[href="#"]::before,
+#auth-button[href="#"]::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  width: min(170px, 80vw);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scaleX(.75);
+  transition: opacity .28s ease, transform .28s ease;
+}
+
+/* Center the selected white light beam on the Chinese label. */
+.home-menu .menu-cn::before,
+#auth-button[href="#"]::before {
+  height: 34px;
+  background: url("../images/ui/menu-hover-beam.png") center / 210px auto no-repeat;
+  filter: none;
+}
+
+.home-menu .menu-cn::after,
+#auth-button[href="#"]::after {
+  content: none;
+}
+
+.home-menu .button:hover,
+.home-menu .button:focus-visible {
+  color: #fffdf5;
+  border: 0;
+  outline: none;
+  background: transparent;
+  transform: scale(1.045);
+  text-shadow: 0 2px 3px #000, 0 0 10px #000, 0 0 10px rgba(244, 250, 255, .52);
+}
+
+.home-menu .button:hover .menu-cn::before,
+.home-menu .button:hover .menu-cn::after,
+.home-menu .button:focus-visible .menu-cn::before,
+.home-menu .button:focus-visible .menu-cn::after,
+#auth-button[href="#"]:hover::before,
+#auth-button[href="#"]:hover::after,
+#auth-button[href="#"]:focus-visible::before,
+#auth-button[href="#"]:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, -50%) scaleX(1);
+}
+
+.menu-en {
+  color: rgba(255, 255, 255, .8);
+  font-family: "Yu Mincho", "Noto Serif JP", "Hiragino Mincho ProN", "MS PMincho", "Noto Serif SC", "STKaiti", serif;
+  font-size: .68rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: .1em;
+}
+
+.menu-cn {
+  position: relative;
+  isolation: isolate;
+  margin-top: -.12rem;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+  font-size: clamp(1.12rem, 1.65vw, 1.36rem);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: .18em;
+  -webkit-text-stroke: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, .95), 0 0 7px rgba(0, 0, 0, .8);
+}
+
+.user-status {
+  position: absolute;
+  right: 1.2rem;
+  bottom: 1rem;
+  margin: 0;
+  color: rgba(245, 240, 227, .74);
+  font-size: .72rem;
+  text-shadow: 0 2px 5px #000;
+}
+
+.version-mark {
+  position: absolute;
+  left: 1.2rem;
+  bottom: 1rem;
+  margin: 0;
+  color: rgba(245, 240, 227, .68);
+  font: .76rem/1.2 "Yu Mincho", "Noto Serif JP", "Hiragino Mincho ProN", "MS PMincho", "Noto Serif SC", serif;
+  letter-spacing: .12em;
+  text-shadow: 0 2px 5px #000;
+}
+
+@keyframes home-entry-pulse {
+  0%, 100% { opacity: .95; }
+  50% { opacity: .25; }
+}
+
+@keyframes home-menu-unfold {
+  from { opacity: 0; transform: scale(.18); clip-path: inset(50% 50%); }
+  45% { opacity: .8; transform: scale(.72); clip-path: inset(22% 9%); }
+  to { opacity: 1; transform: scale(1); clip-path: inset(0); }
+}
+
+@keyframes home-cinematic-in {
+  from { transform: scale(1.025); }
+  to { transform: scale(1); }
+}
+
+@keyframes menu-arrive {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}

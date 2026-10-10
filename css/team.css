@@ -1,0 +1,25 @@
+.team-page::before {
+  background:
+    linear-gradient(rgba(7, 8, 7, .72), rgba(7, 8, 7, .9)),
+    url("../images/bg/members.png") center top / cover fixed no-repeat;
+}
+.team-page .site-header { background: rgba(9, 11, 10, .84); }
+.team-page .page-heading { text-shadow: 0 3px 18px rgba(0, 0, 0, .9); }
+.team-summary { margin-bottom: 1.5rem; }
+.member-card { display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--border); background: var(--panel-soft); }
+.member-photo, .profile-photo { width: 100%; min-height: 230px; object-fit: cover; background: linear-gradient(145deg, #303a33, #121714); }
+.member-photo { height: 280px; object-position: center 22%; }
+.profile-photo { min-height: 420px; }
+.member-card .content { display: flex; flex: 1; flex-direction: column; padding: 1.2rem; }
+.member-card .button { margin-top: auto; }
+.profile-layout { display: grid; grid-template-columns: minmax(240px, .7fr) 1.5fr; gap: 1.5rem; }
+.tag-list { display: flex; flex-wrap: wrap; gap: .55rem; padding: 0; list-style: none; }
+.tag-list li { padding: .3rem .7rem; border: 1px solid var(--border); color: var(--muted); }
+.member-one { --moss: #566c5c; --gold: #c2a369; }
+.member-two { --moss: #4e6570; --gold: #8eb2b8; }
+.member-three { --moss: #72554e; --gold: #c18e72; }
+.profile-copy p { text-align: justify; }
+
+@media (max-width: 768px) {
+  .team-page::before { background-attachment: scroll; }
+}
